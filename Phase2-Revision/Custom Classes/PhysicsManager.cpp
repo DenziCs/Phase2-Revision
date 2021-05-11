@@ -9,10 +9,7 @@ PhysicsManager::~PhysicsManager() {
 }
 
 void PhysicsManager::setGravity(float gravMagnitude, Vector gravDirect) {
-	gravity.x = gravDirect.x * gravMagnitude;
-	gravity.y = gravDirect.y * gravMagnitude;
-
-	gravityGenerator = new GravityForceGenerator(gravDirect * gravMagnitude);
+	gravityGenerator.setGravity(gravDirect * gravMagnitude);
 }
 
 void PhysicsManager::setLimit(int limit) {
@@ -25,7 +22,7 @@ void PhysicsManager::setOrigin(Vector origin) {
 }
 
 Vector PhysicsManager::getGravity() {
-	return gravity;
+	return gravityGenerator.getGravity();
 }
 
 int PhysicsManager::getLimit() {
@@ -43,7 +40,7 @@ Vector PhysicsManager::asWindowPoint(Vector cVector) {
 void PhysicsManager::addParticle(Particle* particle) {
 	if (particleList.size() < particleLimit) {
 		particleList.push_back(particle);
-		addForce(particle, gravityGenerator);
+		addForce(particle, &gravityGenerator);
 	}
 }
 
@@ -58,10 +55,18 @@ void PhysicsManager::addForce(Particle* particle, ForceGenerator* generator) {
 	forceRegistry.push_back(f);
 }
 
+void PhysicsManager::removeForce(Particle* target, ForceGenerator* generator) {
+	forceRegistry.remove_if([target, generator](forcePair f) {return f.target == target && f.generator == generator; });
+}
+
 void PhysicsManager::updateForces() {
-	for (int i = 0; i < forceRegistry.size(); i++) {
-		forceRegistry[i].generator->applyForce(forceRegistry[i].target);
+	for (list<forcePair>::iterator i = forceRegistry.begin(); i != forceRegistry.end(); i++) {
+		i->generator->applyForce(i->target);
 	}
+}
+
+void PhysicsManager::clearRegistry() {
+	forceRegistry.clear();
 }
 
 void PhysicsManager::applyToAll(Vector appForce) {

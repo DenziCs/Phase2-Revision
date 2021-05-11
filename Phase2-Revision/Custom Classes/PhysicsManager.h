@@ -14,20 +14,27 @@ class PhysicsManager
 public:
 	PhysicsManager();
 	~PhysicsManager();
+
 	void setGravity(float, Vector);
 	void setLimit(int);
 	void setOrigin(Vector);
+
 	Vector getGravity();
 	int getLimit();
 	Vector getOrigin();
+
 	Vector asWindowPoint(Vector);
+
 	void addParticle(Particle*);
 	void addAnchorPoint(Particle*);
+
 	void addForce(Particle*, ForceGenerator*);
 	void removeForce(Particle*, ForceGenerator*);
 	void clearRegistry();
+
 	void applyToAll(Vector);
 	void addToAll(ForceGenerator*);
+
 	void updateForces();
 	void update(float);
 	void drawAll(sf::RenderWindow*);
@@ -41,9 +48,8 @@ private:
 	
 	void updateParticleList();
 
-	vector<forcePair> forceRegistry;
-	GravityForceGenerator* gravityGenerator;
-	Vector gravity;
+	list<forcePair> forceRegistry;
+	GravityForceGenerator gravityGenerator;
 	Vector worldOrigin;
 	int particleLimit;
 };
