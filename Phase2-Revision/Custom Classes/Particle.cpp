@@ -12,7 +12,7 @@ Particle::Particle(
 	float life,
 	float damp,
 
-	float size,
+	float radius,
 	sf::Color sColor
 ) {
 	psSprite = new sf::CircleShape;
@@ -22,7 +22,8 @@ Particle::Particle(
 	psSprite->setPosition(x, y);
 	lifespan = life;
 	dampFactor = damp;
-	psSprite->setRadius(size);
+	psSprite->setRadius(radius);
+	psSprite->setOrigin(sf::Vector2f(radius, radius));
 	psSprite->setFillColor(sColor);
 }
 
@@ -30,16 +31,21 @@ void Particle::setMass(float _mass) {
 	mass = _mass;
 }
 
-void Particle::setPos(float x, float y) {
+void Particle::setPosition(float x, float y) {
 	psSprite->setPosition(x, y);
+}
+
+void Particle::setVelocity(Vector v) {
+	velocity = v;
 }
 
 void Particle::setLifespan(float life) {
 	lifespan = life;
 }
 
-void Particle::setSize(float size) {
-	psSprite->setRadius(size);
+void Particle::setRadius(float radius) {
+	psSprite->setRadius(radius);
+	psSprite->setOrigin(sf::Vector2f(radius, radius));
 }
 
 void Particle::setColor(sf::Color sColor) {
@@ -54,12 +60,22 @@ float Particle::getMass() {
 	return mass;
 }
 
+Vector Particle::getPosition() {
+	sf::Vector2f pos = psSprite->getPosition();
+	Vector position(pos.x, pos.y);
+	return position;
+}
+
 Vector Particle::getVelocity() {
 	return velocity;
 }
 
 Vector Particle::getAcceleration() {
 	return acceleration;
+}
+
+float Particle::getRadius() {
+	return psSprite->getRadius();
 }
 
 bool Particle::destroyed() {

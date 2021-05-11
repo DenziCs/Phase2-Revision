@@ -142,6 +142,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Custom Classes\AppliedForceGenerator.cpp" />
+    <ClCompile Include="Custom Classes\GravityForceGenerator.cpp" />
     <ClCompile Include="Custom Classes\Vector.cpp" />
     <ClCompile Include="Custom Classes\Game.cpp" />
     <ClCompile Include="Custom Classes\Particle.cpp" />
@@ -149,6 +151,9 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Custom Classes\AppliedForceGenerator.h" />
+    <ClInclude Include="Custom Classes\ForceGenerator.h" />
+    <ClInclude Include="Custom Classes\GravityForceGenerator.h" />
     <ClInclude Include="Custom Classes\Vector.h" />
     <ClInclude Include="Custom Classes\Game.h" />
     <ClInclude Include="Custom Classes\Particle.h" />

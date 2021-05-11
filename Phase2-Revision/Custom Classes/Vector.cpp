@@ -1,4 +1,6 @@
 #include "Vector.h"
+#include<iostream>
+using namespace std;
 using namespace gdphys;
 
 Vector::Vector() {
@@ -16,9 +18,11 @@ float Vector::getMagnitude() {
 }
 
 void Vector::normalize() {
-	Vector normVector;
-	this->x = x / getMagnitude();
-	this->y = y / getMagnitude();
+	Vector normVector(this->x, this->y);
+	normVector.x = normVector.x / getMagnitude();
+	normVector.y = normVector.y / getMagnitude();
+	this->x = normVector.x;
+	this->y = normVector.y;
 }
 
 Vector Vector::operator +(const Vector& vector2) {

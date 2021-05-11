@@ -1,4 +1,7 @@
 #include"Particle.h"
+#include"ForceGenerator.h"
+#include"GravityForceGenerator.h"
+#include"AppliedForceGenerator.h"
 #include<list>
 #include<SFML/Graphics.hpp>
 #include<time.h>
@@ -19,15 +22,27 @@ public:
 	Vector getOrigin();
 	Vector asWindowPoint(Vector);
 	void addParticle(Particle*);
+	void addAnchorPoint(Particle*);
+	void addForce(Particle*, ForceGenerator*);
+	void removeForce(Particle*, ForceGenerator*);
+	void clearRegistry();
 	void applyToAll(Vector);
-	void resetAll();
+	void addToAll(ForceGenerator*);
+	void updateForces();
 	void update(float);
 	void drawAll(sf::RenderWindow*);
 	
 	list<Particle*> particleList;
 private:
+	struct forcePair {
+		ForceGenerator* generator;
+		Particle* target;
+	};
+	
 	void updateParticleList();
 
+	vector<forcePair> forceRegistry;
+	GravityForceGenerator* gravityGenerator;
 	Vector gravity;
 	Vector worldOrigin;
 	int particleLimit;
