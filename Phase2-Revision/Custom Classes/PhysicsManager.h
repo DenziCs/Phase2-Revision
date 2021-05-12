@@ -7,6 +7,7 @@
 #include"ContactResolverIterator.h"
 #include"ParticleAnchor.h"
 #include"AnchoredSpring.h"
+#include"AnchoredCable.h"
 #include"ParticleLink.h"
 #include"ParticleRod.h"
 #include<list>
@@ -50,7 +51,7 @@ public:
 	void anchorWithCable(Particle*, Vector, float, float);
 
 	void linkWithSpring(Particle*, Particle*, float, float);
-	void linkWithRod(Particle*, Particle*, float);
+	void linkWithRod(Particle*, Particle*);
 
 	void updateForces();
 	void update(float);

@@ -119,12 +119,20 @@ void PhysicsManager::checkParticles() {
 	}
 }
 
+void PhysicsManager::checkAnchors() {
+	if (!anchorList.empty()) {
+		for (int i = 0; i < anchorList.size(); i++) {
+			ContactResolver* contact = anchorList[i]->getContact();
+			if (contact != nullptr) contactList.push_back(contact);
+		}
+	}
+}
+
 void PhysicsManager::checkLinks() {
-	ContactResolver* contact;
 	if (!linkList.empty()) {
 		for (int i = 0; i < linkList.size(); i++) {
-			contact = linkList[i]->getContact();
-			contactList.push_back(contact);
+			ContactResolver* contact = linkList[i]->getContact();
+			if(contact != nullptr) contactList.push_back(contact);
 		}
 	}
 }
@@ -135,8 +143,14 @@ void PhysicsManager::anchorWithSpring(Particle* particle, Vector anchorPoint, fl
 	addForce(particle, spring->forceGen);
 }
 
-void PhysicsManager::linkWithRod(Particle* particleA, Particle* particleB, float length) {
-	ParticleRod* rod = new ParticleRod(particleA, particleB, length);
+void PhysicsManager::anchorWithCable(Particle* particle, Vector anchorPoint, float springConst, float restLength) {
+	AnchoredCable* cable = new AnchoredCable(anchorPoint, particle, springConst, restLength);
+	anchorList.push_back(cable);
+	addForce(particle, cable->forceGen);
+}
+
+void PhysicsManager::linkWithRod(Particle* particleA, Particle* particleB) {
+	ParticleRod* rod = new ParticleRod(particleA, particleB);
 	linkList.push_back(rod);
 }
 
@@ -151,6 +165,7 @@ void PhysicsManager::update(float deltaTime) {
 	}
 
 	checkParticles();
+	checkAnchors();
 	checkLinks();
 	iterator.resolveContacts(contactList);
 	contactList.clear();

@@ -4,7 +4,7 @@
 class ParticleRod : public ParticleLink
 {
 public:
-	ParticleRod(Particle*, Particle*, float);
+	ParticleRod(Particle*, Particle*);
 	ContactResolver* getContact();
 	
 	float length;

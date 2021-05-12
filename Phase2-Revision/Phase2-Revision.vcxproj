@@ -142,6 +142,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Custom Classes\AnchoredCable.cpp" />
+    <ClCompile Include="Custom Classes\AnchoredCableForceGenerator.cpp" />
     <ClCompile Include="Custom Classes\AnchoredSpring.cpp" />
     <ClCompile Include="Custom Classes\AnchoredSpringForceGenerator.cpp" />
     <ClCompile Include="Custom Classes\AppliedForceGenerator.cpp" />
@@ -159,6 +161,8 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Custom Classes\AnchoredCable.h" />
+    <ClInclude Include="Custom Classes\AnchoredCableForceGenerator.h" />
     <ClInclude Include="Custom Classes\AnchoredSpring.h" />
     <ClInclude Include="Custom Classes\AnchoredSpringForceGenerator.h" />
     <ClInclude Include="Custom Classes\AppliedForceGenerator.h" />
