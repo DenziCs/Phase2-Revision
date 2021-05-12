@@ -3,6 +3,8 @@
 #include"GravityForceGenerator.h"
 #include"AppliedForceGenerator.h"
 #include"ContactResolver.h"
+#include"ParticleAnchor.h"
+#include"AnchoredSpring.h"
 #include<list>
 #include<vector>
 #include<SFML/Graphics.hpp>
@@ -37,6 +39,9 @@ public:
 	void addToAll(ForceGenerator*);
 
 	void addContact(Particle*, Particle*, float, float);
+	void getOverlaps();
+
+	void anchorParticle(Particle*, ParticleAnchor*);
 
 	void updateForces();
 	void update(float);
@@ -44,6 +49,7 @@ public:
 	
 	list<Particle*> particleList;
 	vector<ContactResolver*> contactList;
+	vector<ParticleAnchor*> anchorList;
 private:
 	struct forcePair {
 		ForceGenerator* generator;

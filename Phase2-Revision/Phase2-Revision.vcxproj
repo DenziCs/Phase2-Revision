@@ -142,9 +142,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Custom Classes\AnchoredSpring.cpp" />
+    <ClCompile Include="Custom Classes\AnchoredSpringForceGenerator.cpp" />
     <ClCompile Include="Custom Classes\AppliedForceGenerator.cpp" />
     <ClCompile Include="Custom Classes\ContactResolver.cpp" />
     <ClCompile Include="Custom Classes\GravityForceGenerator.cpp" />
+    <ClCompile Include="Custom Classes\ParticleAnchor.cpp" />
     <ClCompile Include="Custom Classes\Vector.cpp" />
     <ClCompile Include="Custom Classes\Game.cpp" />
     <ClCompile Include="Custom Classes\Particle.cpp" />
@@ -152,10 +155,13 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Custom Classes\AnchoredSpring.h" />
+    <ClInclude Include="Custom Classes\AnchoredSpringForceGenerator.h" />
     <ClInclude Include="Custom Classes\AppliedForceGenerator.h" />
     <ClInclude Include="Custom Classes\ContactResolver.h" />
     <ClInclude Include="Custom Classes\ForceGenerator.h" />
     <ClInclude Include="Custom Classes\GravityForceGenerator.h" />
+    <ClInclude Include="Custom Classes\ParticleAnchor.h" />
     <ClInclude Include="Custom Classes\Vector.h" />
     <ClInclude Include="Custom Classes\Game.h" />
     <ClInclude Include="Custom Classes\Particle.h" />
