@@ -7,4 +7,5 @@ class Utils{
 public:
 	static Vector worldOrigin;
 	static sf::Vector2f toWindowPoint(Vector v);
+	static sf::Vector2f toWindowVector(Vector v);
 };

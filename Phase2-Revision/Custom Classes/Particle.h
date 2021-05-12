@@ -1,4 +1,5 @@
 #include"Vector.h"
+#include"Utils.h"
 #include<SFML/Graphics.hpp>
 #include<vector>
 #include<math.h>
@@ -20,7 +21,6 @@ public:
 	void setDampFactor(float);
 	float getMass();
 	Vector getPosition();
-	Vector getWindowPosition();
 	Vector getVelocity();
 	Vector getAcceleration();
 	float getRadius();
@@ -30,12 +30,10 @@ public:
 	void update(float);
 	void draw(sf::RenderWindow*);
 
-	Vector asWindowVector(Vector);
-	Vector asConventionalVector(Vector);
-
 	sf::CircleShape* psSprite;
 private:
 	float mass;
+	Vector position;
 	Vector velocity;
 	Vector acceleration;
 	Vector netForce;

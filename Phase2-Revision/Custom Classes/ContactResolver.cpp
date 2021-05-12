@@ -75,11 +75,11 @@ void ContactResolver::resolveInterpenetration(float time) {
 	Vector moveByMass = contactNormal * totalMoveByMass;
 
 	Vector P_a = moveByMass * ((float)1 / particles[0]->getMass());
-	particles[0]->setPosition(particles[0]->getWindowPosition().x + P_a.x, particles[0]->getWindowPosition().y + P_a.y);
+	particles[0]->setPosition(particles[0]->getPosition().x + P_a.x, particles[0]->getPosition().y + P_a.y);
 
 	if (particles[1]) {
 		Vector P_b = moveByMass * (-(float)1 / particles[1]->getMass());
-		particles[1]->setPosition(particles[1]->getWindowPosition().x + P_b.x, particles[1]->getWindowPosition().y + P_b.y);
+		particles[1]->setPosition(particles[1]->getPosition().x + P_b.x, particles[1]->getPosition().y + P_b.y);
 	}
 	
 	overlapDepth = 0;

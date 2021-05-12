@@ -17,8 +17,7 @@ void PhysicsManager::setLimit(int limit) {
 }
 
 void PhysicsManager::setOrigin(Vector origin) {
-	worldOrigin.x = origin.x;
-	worldOrigin.y = origin.y;
+	Utils::worldOrigin = origin;
 }
 
 Vector PhysicsManager::getGravity() {
@@ -30,11 +29,7 @@ int PhysicsManager::getLimit() {
 }
 
 Vector PhysicsManager::getOrigin() {
-	return worldOrigin;
-}
-
-Vector PhysicsManager::asWindowPoint(Vector cVector) {
-	return Vector(worldOrigin.x + cVector.x, worldOrigin.y - cVector.y);
+	return Utils::worldOrigin;
 }
 
 void PhysicsManager::addParticle(Particle* particle) {

@@ -1,3 +1,4 @@
+#include"Utils.h"
 #include"Particle.h"
 #include"ForceGenerator.h"
 #include"GravityForceGenerator.h"
@@ -26,8 +27,6 @@ public:
 	Vector getGravity();
 	int getLimit();
 	Vector getOrigin();
-
-	Vector asWindowPoint(Vector);
 
 	void addParticle(Particle*);
 
@@ -61,6 +60,5 @@ private:
 
 	list<forcePair> forceRegistry;
 	GravityForceGenerator gravityGenerator;
-	Vector worldOrigin;
 	int particleLimit;
 };

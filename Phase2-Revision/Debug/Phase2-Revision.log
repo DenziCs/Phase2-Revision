@@ -1,2 +1,7 @@
-﻿  AnchoredSpringForceGenerator.cpp
+﻿  Game.cpp
+  Particle.cpp
+C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\Particle.cpp(98,63): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\Particle.cpp(99,63): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  main.cpp
+  Generating Code...
   Phase2-Revision.vcxproj -> C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Debug\Phase2-Revision.exe

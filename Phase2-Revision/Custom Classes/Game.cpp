@@ -6,8 +6,7 @@ Game::Game() : gWindow(sf::VideoMode(WINDOW_X, WINDOW_Y), "Newton's Cradle") {
     physWorld.setLimit(25);
     physWorld.setOrigin(Vector(WINDOW_X / 2, WINDOW_Y / 2));
 
-    Vector e = physWorld.asWindowPoint(Vector(0, 0));
-    Particle* particle1 = new Particle(20.f, e.x, e.y, 80.f, 1.f, 5.f, sf::Color::White);
+    Particle* particle1 = new Particle(20.f, 0, 0, 80.f, 1.f, 5.f, sf::Color::White);
     physWorld.addParticle(particle1);
     //particle1->setVelocity(Vector(30, -30));
 
