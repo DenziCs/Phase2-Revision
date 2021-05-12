@@ -11,6 +11,10 @@ ParticleAnchor::ParticleAnchor(Vector position, Particle* _particle) {
 	line[1].position = particle->psSprite->getPosition();
 }
 
+ContactResolver* ParticleAnchor::getContact() {
+	return nullptr;
+}
+
 float ParticleAnchor::getCurrentLength() {
 	Vector length = anchorPoint - particle->getPosition();
 	return length.getMagnitude();

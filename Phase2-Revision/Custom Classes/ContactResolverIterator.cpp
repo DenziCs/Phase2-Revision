@@ -3,6 +3,7 @@
 void ContactResolverIterator::resolveContacts(vector<ContactResolver*> contacts) {
 	current_iterations = 0;
 	while (current_iterations < max_iterations) {
+		if (contacts.empty()) return;
 		for (int i = 0; i < contacts.size(); i++) {
 			if (contacts[i]->getSeparatingSpeed() >= 0 && contacts[i]->overlapDepth <= 0) {
 				return;

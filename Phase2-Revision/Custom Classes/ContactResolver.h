@@ -8,6 +8,7 @@ public:
 	ContactResolver(Particle*, Particle*, float, float);
 	void resolve();
 	float getSeparatingSpeed();
+	Vector getContactNormal();
 
 	Particle* particles[2];
 	float restitution = 1.f;
@@ -16,5 +17,4 @@ public:
 private:
 	void resolveVelocity();
 	void resolveInterpenetration();
-	Vector getContactNormal();
 };

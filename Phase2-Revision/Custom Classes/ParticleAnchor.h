@@ -8,6 +8,7 @@ class ParticleAnchor
 {
 public:
 	ParticleAnchor(Vector, Particle*);
+	virtual ContactResolver* getContact();
 	void draw(sf::RenderWindow*);
 	void update();
 

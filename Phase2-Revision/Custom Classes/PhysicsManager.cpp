@@ -85,7 +85,7 @@ void PhysicsManager::addContact(Particle* particleA, Particle* particleB, float 
 	contactList.push_back(contact);
 }
 
-void PhysicsManager::getOverlaps() {
+void PhysicsManager::checkParticles() {
 	for (int i = 0; i < particleList.size() - 1; i++) {
 
 		std::list<Particle*>::iterator a = std::next(particleList.begin(), i);
@@ -119,10 +119,25 @@ void PhysicsManager::getOverlaps() {
 	}
 }
 
+void PhysicsManager::checkLinks() {
+	ContactResolver* contact;
+	if (!linkList.empty()) {
+		for (int i = 0; i < linkList.size(); i++) {
+			contact = linkList[i]->getContact();
+			contactList.push_back(contact);
+		}
+	}
+}
+
 void PhysicsManager::anchorWithSpring(Particle* particle, Vector anchorPoint, float springConst, float restLength) {
 	AnchoredSpring* spring = new AnchoredSpring(anchorPoint, particle, springConst, restLength);
 	anchorList.push_back(spring);
 	addForce(particle, spring->forceGen);
+}
+
+void PhysicsManager::linkWithRod(Particle* particleA, Particle* particleB, float length) {
+	ParticleRod* rod = new ParticleRod(particleA, particleB, length);
+	linkList.push_back(rod);
 }
 
 void PhysicsManager::update(float deltaTime) {
@@ -135,13 +150,20 @@ void PhysicsManager::update(float deltaTime) {
 		}
 	}
 
-	getOverlaps();
+	checkParticles();
+	checkLinks();
 	iterator.resolveContacts(contactList);
 	contactList.clear();
 
 	if (!anchorList.empty()) {
 		for (int i = 0; i < anchorList.size(); i++) {
 			anchorList[i]->update();
+		}
+	}
+
+	if (!linkList.empty()) {
+		for (int i = 0; i < linkList.size(); i++) {
+			linkList[i]->update();
 		}
 	}
 }
@@ -156,6 +178,12 @@ void PhysicsManager::drawAll(sf::RenderWindow* pgWindow) {
 	if (!anchorList.empty()) {
 		for (int i = 0; i < anchorList.size(); i++) {
 			anchorList[i]->draw(pgWindow);
+		}
+	}
+
+	if (!linkList.empty()) {
+		for (int i = 0; i < linkList.size(); i++) {
+			linkList[i]->draw(pgWindow);
 		}
 	}
 }

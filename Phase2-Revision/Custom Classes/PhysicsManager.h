@@ -7,6 +7,8 @@
 #include"ContactResolverIterator.h"
 #include"ParticleAnchor.h"
 #include"AnchoredSpring.h"
+#include"ParticleLink.h"
+#include"ParticleRod.h"
 #include<list>
 #include<vector>
 #include<SFML/Graphics.hpp>
@@ -40,10 +42,15 @@ public:
 	void addToAll(ForceGenerator*);
 
 	void addContact(Particle*, Particle*, float, float);
-	void getOverlaps();
+	void checkParticles();
+	void checkAnchors();
+	void checkLinks();
 
 	void anchorWithSpring(Particle*, Vector, float, float);
 	void anchorWithCable(Particle*, Vector, float, float);
+
+	void linkWithSpring(Particle*, Particle*, float, float);
+	void linkWithRod(Particle*, Particle*, float);
 
 	void updateForces();
 	void update(float);
@@ -52,6 +59,7 @@ public:
 	list<Particle*> particleList;
 	vector<ContactResolver*> contactList;
 	vector<ParticleAnchor*> anchorList;
+	vector<ParticleLink*> linkList;
 private:
 	struct forcePair {
 		ForceGenerator* generator;
