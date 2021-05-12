@@ -25,4 +25,5 @@ private:
     void render();
 
     sf::RenderWindow gWindow;
+    bool push = false;
 };

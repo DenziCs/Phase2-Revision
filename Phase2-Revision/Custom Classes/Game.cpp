@@ -27,7 +27,14 @@ Game::Game() : gWindow(sf::VideoMode(WINDOW_X, WINDOW_Y), "Newton's Cradle") {
     physWorld.addParticle(particle5);
     physWorld.anchorWithCable(particle5, Vector(170, WINDOW_Y / 2), 5, WINDOW_Y / 2);
 
-    particle1->applyForce(Vector(-32000, 0));
+    //physWorld.linkWithRod(particle1, particle2);
+
+    //AppliedForceGenerator* gen = new AppliedForceGenerator(Vector(4000, 0));
+    //physWorld.addForce(particle1, gen);
+
+    //physWorld.anchorWithSpring(particle1, Vector(0, 40), 5.f, 0.5f);
+    //particle1->applyForce(Vector(-32000, 0));
+    //particle2->applyForce(Vector(-14000, 0));
 };
 
 void Game::run() {
@@ -52,6 +59,11 @@ void Game::processEvents() {
         case sf::Event::Closed:
             gWindow.close();
             break;
+        case sf::Event::KeyReleased:
+            if (event.key.code && sf::Keyboard::Space) {
+                push = true;
+            }
+            break;
         default:
             break;
         }
@@ -60,6 +72,10 @@ void Game::processEvents() {
 
 void Game::update(sf::Time deltaTime)
 {
+    if (push) {
+        (*physWorld.particleList.begin())->applyForce(Vector(-40000, 0));
+        push = false;
+    }
     physWorld.update(deltaTime.asSeconds());
 }
 
