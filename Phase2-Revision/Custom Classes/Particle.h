@@ -20,6 +20,7 @@ public:
 	void setDampFactor(float);
 	float getMass();
 	Vector getPosition();
+	Vector getWindowPosition();
 	Vector getVelocity();
 	Vector getAcceleration();
 	float getRadius();

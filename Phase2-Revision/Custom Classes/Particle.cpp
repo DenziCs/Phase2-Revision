@@ -66,6 +66,12 @@ Vector Particle::getPosition() {
 	return asConventionalVector(position);
 }
 
+Vector Particle::getWindowPosition() {
+	sf::Vector2f pos = psSprite->getPosition();
+	Vector position(pos.x, pos.y);
+	return position;
+}
+
 Vector Particle::getVelocity() {
 	return velocity;
 }

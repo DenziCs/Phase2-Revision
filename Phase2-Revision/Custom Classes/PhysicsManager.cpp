@@ -40,7 +40,7 @@ Vector PhysicsManager::asWindowPoint(Vector cVector) {
 void PhysicsManager::addParticle(Particle* particle) {
 	if (particleList.size() < particleLimit) {
 		particleList.push_back(particle);
-		//addForce(particle, &gravityGenerator);
+		addForce(particle, &gravityGenerator);
 	}
 }
 
@@ -90,11 +90,9 @@ void PhysicsManager::update(float deltaTime) {
 	updateParticleList();
 	updateForces();
 	
-	/*
 	for (int i = 0; i < contactList.size(); i++) {
 		contactList[i]->resolve(deltaTime);
 	}
-	*/
 
 	if (!particleList.empty()) {
 		for (list<Particle*>::iterator i = particleList.begin(); i != particleList.end(); i++) {
