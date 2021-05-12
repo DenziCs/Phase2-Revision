@@ -30,11 +30,11 @@ public:
 	void update(float);
 	void draw(sf::RenderWindow*);
 
-	sf::CircleShape* psSprite;
-private:
 	Vector asWindowVector(Vector);
 	Vector asConventionalVector(Vector);
 
+	sf::CircleShape* psSprite;
+private:
 	float mass;
 	Vector velocity;
 	Vector acceleration;

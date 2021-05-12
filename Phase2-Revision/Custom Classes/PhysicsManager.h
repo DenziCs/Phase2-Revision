@@ -41,7 +41,8 @@ public:
 	void addContact(Particle*, Particle*, float, float);
 	void getOverlaps();
 
-	void anchorParticle(Particle*, ParticleAnchor*);
+	void anchorWithSpring(Particle*, Vector, float, float);
+	void anchorWithCable(Particle*, Vector, float, float);
 
 	void updateForces();
 	void update(float);

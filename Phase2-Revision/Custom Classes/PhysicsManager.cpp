@@ -120,6 +120,12 @@ void PhysicsManager::getOverlaps() {
 	}
 }
 
+void PhysicsManager::anchorWithSpring(Particle* particle, Vector anchorPoint, float springConst, float restLength) {
+	AnchoredSpring* spring = new AnchoredSpring(anchorPoint, particle, springConst, restLength);
+	anchorList.push_back(spring);
+	addForce(particle, spring->forceGen);
+}
+
 void PhysicsManager::update(float deltaTime) {
 	updateParticleList();
 	updateForces();
@@ -134,12 +140,25 @@ void PhysicsManager::update(float deltaTime) {
 	for (int i = 0; i < contactList.size(); i++) {
 		contactList[i]->resolve(deltaTime);
 	}
+	contactList.clear();
+
+	if (!anchorList.empty()) {
+		for (int i = 0; i < anchorList.size(); i++) {
+			anchorList[i]->update();
+		}
+	}
 }
 
 void PhysicsManager::drawAll(sf::RenderWindow* pgWindow) {
 	if (!particleList.empty()) {
 		for (list<Particle*>::iterator i = particleList.begin(); i != particleList.end(); i++) {
 			(*i)->draw(pgWindow);
+		}
+	}
+
+	if (!anchorList.empty()) {
+		for (int i = 0; i < anchorList.size(); i++) {
+			anchorList[i]->draw(pgWindow);
 		}
 	}
 }
