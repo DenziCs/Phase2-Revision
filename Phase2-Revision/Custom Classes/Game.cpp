@@ -7,34 +7,34 @@ Game::Game() : gWindow(sf::VideoMode(WINDOW_X, WINDOW_Y), "Newton's Cradle") {
     physWorld.setOrigin(Vector(WINDOW_X / 2, WINDOW_Y / 2));
     physWorld.setContactLimit(25);
 
-    Particle* particle1 = new Particle(20.f, -170, 0, 80.f, 1.f, 40.f, sf::Color::Blue);
+    Particle* particle1 = new Particle(false, 20.f, -170, 0, 1.f, 40.f, sf::Color::Blue);
     physWorld.addParticle(particle1);
     physWorld.anchorWithCable(particle1, Vector(-170, WINDOW_Y / 2), 5, WINDOW_Y / 2);
 
-    Particle* particle2 = new Particle(20.f, -85, 0, 80.f, 1.f, 40.f, sf::Color::Blue);
+    Particle* particle2 = new Particle(false, 20.f, -85, 0, 1.f, 40.f, sf::Color::Blue);
     physWorld.addParticle(particle2);
     physWorld.anchorWithCable(particle2, Vector(-85, WINDOW_Y / 2), 5, WINDOW_Y / 2);
 
-    Particle* particle3 = new Particle(20.f, 0, 0, 80.f, 1.f, 40.f, sf::Color::Blue);
+    Particle* particle3 = new Particle(false, 20.f, 0, 0, 1.f, 40.f, sf::Color::Blue);
     physWorld.addParticle(particle3);
     physWorld.anchorWithCable(particle3, Vector(0, WINDOW_Y / 2), 5, WINDOW_Y / 2);
 
-    Particle* particle4 = new Particle(20.f, 85, 0, 80.f, 1.f, 40.f, sf::Color::Blue);
+    Particle* particle4 = new Particle(false, 20.f, 85, 0, 1.f, 40.f, sf::Color::Blue);
     physWorld.addParticle(particle4);
     physWorld.anchorWithCable(particle4, Vector(85, WINDOW_Y / 2), 5, WINDOW_Y / 2);
 
-    Particle* particle5 = new Particle(20.f, 170, 0, 80.f, 1.f, 40.f, sf::Color::Blue);
+    Particle* particle5 = new Particle(false, 20.f, 170, 0, 1.f, 40.f, sf::Color::Blue);
     physWorld.addParticle(particle5);
     physWorld.anchorWithCable(particle5, Vector(170, WINDOW_Y / 2), 5, WINDOW_Y / 2);
 
-    //physWorld.linkWithRod(particle1, particle2);
+    Particle* particle6 = new Particle(false, 20.f, -40, -80, 1.f, 5.f, sf::Color::Blue);
+    physWorld.addParticle(particle6);
 
-    //AppliedForceGenerator* gen = new AppliedForceGenerator(Vector(4000, 0));
-    //physWorld.addForce(particle1, gen);
+    Particle* particle7 = new Particle(false, 20.f, 40, -60, 1.f, 5.f, sf::Color::Blue);
+    physWorld.addParticle(particle7);
 
-    //physWorld.anchorWithSpring(particle1, Vector(0, 40), 5.f, 0.5f);
-    //particle1->applyForce(Vector(-32000, 0));
-    //particle2->applyForce(Vector(-14000, 0));
+    physWorld.linkWithSpring(particle6, particle7, 5, 0.5);
+    particle6->applyForce(Vector(20000, 0));
 };
 
 void Game::run() {

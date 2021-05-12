@@ -6,10 +6,10 @@ Particle::Particle() {
 }
 
 Particle::Particle(
+	bool lifespanIsOn,
 	float _mass,
 	float x,
 	float y,
-	float life,
 	float damp,
 
 	float radius,
@@ -18,13 +18,17 @@ Particle::Particle(
 	psSprite = new sf::CircleShape;
 	netForce = Vector(0.0f, 0.0f);
 
+	hasLifespan = lifespanIsOn;
 	mass = _mass;
 	psSprite->setPosition(Utils::toWindowPoint(Vector(x, y)));
-	lifespan = life;
 	dampFactor = damp;
 	psSprite->setRadius(radius);
 	psSprite->setOrigin(sf::Vector2f(radius, radius));
 	psSprite->setFillColor(sColor);
+}
+
+void Particle::setLifespanMode(bool lifespanIsOn) {
+	hasLifespan = lifespanIsOn;
 }
 
 void Particle::setMass(float _mass) {
@@ -102,8 +106,10 @@ void Particle::update(float deltaTime) {
 	velocity.y += acceleration.y * deltaTime;
 	velocity.y *= powf(dampFactor, deltaTime);
 
-	lifespan -= deltaTime;
-	if (lifespan <= 0) isDestroyed = true;
+	if (hasLifespan) {
+		lifespan -= deltaTime;
+		if (lifespan <= 0) isDestroyed = true;
+	}
 
 	resetForce();
 }

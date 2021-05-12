@@ -11,7 +11,8 @@ class Particle
 {
 public:
 	Particle();
-	Particle(float, float, float, float, float, float, sf::Color);
+	Particle(bool, float, float, float, float, float, sf::Color);
+	void setLifespanMode(bool);
 	void setMass(float);
 	void setPosition(float, float);
 	void setVelocity(Vector);
@@ -37,7 +38,8 @@ private:
 	Vector acceleration;
 	Vector netForce;
 		// Default constructor yields the zero vector.
-	float lifespan;
-	float dampFactor = 1;
+	float lifespan = 5.f;
+	float dampFactor = 1.f;
+	bool hasLifespan = false;
 	bool isDestroyed = false;
 };
