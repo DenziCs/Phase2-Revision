@@ -33,7 +33,6 @@ public:
 	sf::CircleShape* psSprite;
 private:
 	float mass;
-	Vector position;
 	Vector velocity;
 	Vector acceleration;
 	Vector netForce;

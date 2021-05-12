@@ -51,6 +51,9 @@
     <ClCompile Include="Custom Classes\Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Custom Classes\ContactResolverIterator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Custom Classes\Vector.h">
@@ -87,6 +90,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Custom Classes\Utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Custom Classes\ContactResolverIterator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

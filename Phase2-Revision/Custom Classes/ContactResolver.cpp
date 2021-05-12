@@ -26,7 +26,7 @@ float ContactResolver::getSeparatingSpeed() {
 	return velocity.dotProduct(contactNormal);
 }
 
-void ContactResolver::resolveVelocity(float time) {
+void ContactResolver::resolveVelocity() {
 	float separatingSpeed = getSeparatingSpeed();
 
 	if (separatingSpeed > 0) {
@@ -57,7 +57,7 @@ void ContactResolver::resolveVelocity(float time) {
 	}
 }
 
-void ContactResolver::resolveInterpenetration(float time) {
+void ContactResolver::resolveInterpenetration() {
 	if (overlapDepth <= 0) {
 		return;
 	}
@@ -85,7 +85,7 @@ void ContactResolver::resolveInterpenetration(float time) {
 	overlapDepth = 0;
 }
 
-void ContactResolver::resolve(float time) {
-	resolveInterpenetration(time);
-	resolveVelocity(time);
+void ContactResolver::resolve() {
+	resolveInterpenetration();
+	resolveVelocity();
 }

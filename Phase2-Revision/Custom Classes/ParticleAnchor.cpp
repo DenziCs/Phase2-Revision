@@ -5,7 +5,7 @@ ParticleAnchor::ParticleAnchor(Vector position, Particle* _particle) {
 	particle = _particle;
 
 	line[0].color = sf::Color::White;
-	line[0].position = sf::Vector2f(anchorPoint.x, anchorPoint.y);
+	line[0].position = Utils::toWindowPoint(anchorPoint);
 
 	line[1].color = sf::Color::White;
 	line[1].position = particle->psSprite->getPosition();

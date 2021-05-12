@@ -12,12 +12,16 @@ void PhysicsManager::setGravity(float gravMagnitude, Vector gravDirect) {
 	gravityGenerator.setGravity(gravDirect * gravMagnitude);
 }
 
-void PhysicsManager::setLimit(int limit) {
+void PhysicsManager::setLimit(unsigned int limit) {
 	particleLimit = limit;
 }
 
 void PhysicsManager::setOrigin(Vector origin) {
 	Utils::worldOrigin = origin;
+}
+
+void PhysicsManager::setContactLimit(unsigned int limit) {
+	iterator.max_iterations = limit;
 }
 
 Vector PhysicsManager::getGravity() {
@@ -132,9 +136,7 @@ void PhysicsManager::update(float deltaTime) {
 	}
 
 	getOverlaps();
-	for (int i = 0; i < contactList.size(); i++) {
-		contactList[i]->resolve(deltaTime);
-	}
+	iterator.resolveContacts(contactList);
 	contactList.clear();
 
 	if (!anchorList.empty()) {

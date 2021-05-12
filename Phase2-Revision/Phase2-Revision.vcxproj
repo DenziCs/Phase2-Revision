@@ -146,6 +146,7 @@
     <ClCompile Include="Custom Classes\AnchoredSpringForceGenerator.cpp" />
     <ClCompile Include="Custom Classes\AppliedForceGenerator.cpp" />
     <ClCompile Include="Custom Classes\ContactResolver.cpp" />
+    <ClCompile Include="Custom Classes\ContactResolverIterator.cpp" />
     <ClCompile Include="Custom Classes\GravityForceGenerator.cpp" />
     <ClCompile Include="Custom Classes\ParticleAnchor.cpp" />
     <ClCompile Include="Custom Classes\Utils.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Custom Classes\AnchoredSpringForceGenerator.h" />
     <ClInclude Include="Custom Classes\AppliedForceGenerator.h" />
     <ClInclude Include="Custom Classes\ContactResolver.h" />
+    <ClInclude Include="Custom Classes\ContactResolverIterator.h" />
     <ClInclude Include="Custom Classes\ForceGenerator.h" />
     <ClInclude Include="Custom Classes\GravityForceGenerator.h" />
     <ClInclude Include="Custom Classes\ParticleAnchor.h" />

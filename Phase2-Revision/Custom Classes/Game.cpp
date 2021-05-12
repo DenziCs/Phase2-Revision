@@ -2,26 +2,15 @@
 
 Game::Game() : gWindow(sf::VideoMode(WINDOW_X, WINDOW_Y), "Newton's Cradle") {
     gWindow.setFramerateLimit(60);
-    physWorld.setGravity(0, Vector(0, -1));
+    physWorld.setGravity(9.8, Vector(0, -1));
     physWorld.setLimit(25);
     physWorld.setOrigin(Vector(WINDOW_X / 2, WINDOW_Y / 2));
 
-    Particle* particle1 = new Particle(20.f, 0, 0, 80.f, 1.f, 5.f, sf::Color::White);
+    Particle* particle1 = new Particle(20.f, 0, -10, 80.f, 1.f, 5.f, sf::Color::Blue);
     physWorld.addParticle(particle1);
-    //particle1->setVelocity(Vector(30, -30));
 
-    physWorld.anchorWithSpring(particle1, Vector(400, 50), 5, 0.5f);
-    particle1->applyForce(Vector(-90, 4800));
-
-    /*
-    e = physWorld.asWindowPoint(Vector(75, -75));
-    Particle* particle2 = new Particle(1.5f, e.x, e.y, 80.f, 1.f, 7.f, sf::Color::Blue);
-    physWorld.addParticle(particle2);
-    particle2->setVelocity(Vector(-10, 10));
-    */
-
-    //AppliedForceGenerator* gen = new AppliedForceGenerator(Vector(0, 98));
-    //physWorld.addForce(particle1, gen);
+    physWorld.anchorWithSpring(particle1, Vector(0, 40), 5.f, 0.5f);
+    particle1->applyForce(Vector(96000, 48000));
 };
 
 void Game::run() {

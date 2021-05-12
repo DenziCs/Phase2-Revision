@@ -19,7 +19,6 @@ Particle::Particle(
 	netForce = Vector(0.0f, 0.0f);
 
 	mass = _mass;
-	position = Vector(x, y);
 	psSprite->setPosition(Utils::toWindowPoint(Vector(x, y)));
 	lifespan = life;
 	dampFactor = damp;
@@ -33,7 +32,6 @@ void Particle::setMass(float _mass) {
 }
 
 void Particle::setPosition(float x, float y) {
-	position = Vector(x, y);
 	psSprite->setPosition(Utils::toWindowPoint(Vector(x, y)));
 }
 
@@ -63,7 +61,7 @@ float Particle::getMass() {
 }
 
 Vector Particle::getPosition() {
-	return position;
+	return Utils::toPhysicsPoint(psSprite->getPosition());
 }
 
 Vector Particle::getVelocity() {
@@ -97,7 +95,6 @@ void Particle::update(float deltaTime) {
 
 	displacement.x = (0.5 * acceleration.x * powf(deltaTime, 2)) + (velocity.x * deltaTime);
 	displacement.y = (0.5 * acceleration.y * powf(deltaTime, 2)) + (velocity.y * deltaTime);
-	position = position + displacement;
 	psSprite->move(Utils::toWindowVector(displacement));
 
 	velocity.x += acceleration.x * deltaTime;

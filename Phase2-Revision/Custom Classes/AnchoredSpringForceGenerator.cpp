@@ -1,6 +1,4 @@
 #include "AnchoredSpringForceGenerator.h"
-#include<iostream>
-using namespace std;
 
 AnchoredSpringForceGenerator::AnchoredSpringForceGenerator(Vector _position, float _springConstant, float _restLength) {
 	anchorPoint = _position;
@@ -9,16 +7,13 @@ AnchoredSpringForceGenerator::AnchoredSpringForceGenerator(Vector _position, flo
 }
 
 void AnchoredSpringForceGenerator::applyForce(Particle* particle) {
-	sf::Vector2f pos = particle->psSprite->getPosition();
-	Vector position(pos.x, pos.y);
-	Vector force = anchorPoint - position;
+	Vector position = particle->getPosition();
+	Vector force = position - anchorPoint;
 	float mag = force.getMagnitude();
 
 	float springForce = -springConstant * abs(mag - restLength);
 	force = force.getNormalized();
-	cout << force.x << " " << force.y << endl;
 	force = force * springForce;
-	cout << force.x << " " << force.y << endl;
 
 	particle->applyForce(force);
 }

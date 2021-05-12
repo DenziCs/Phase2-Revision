@@ -6,7 +6,7 @@ class ContactResolver {
 public:
 	ContactResolver() {};
 	ContactResolver(Particle*, Particle*, float, float);
-	void resolve(float time);
+	void resolve();
 	float getSeparatingSpeed();
 
 	Particle* particles[2];
@@ -14,7 +14,7 @@ public:
 	Vector contactNormal;
 	float overlapDepth;
 private:
-	void resolveVelocity(float time);
-	void resolveInterpenetration(float time);
+	void resolveVelocity();
+	void resolveInterpenetration();
 	Vector getContactNormal();
 };

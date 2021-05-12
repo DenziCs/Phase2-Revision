@@ -4,6 +4,7 @@
 #include"GravityForceGenerator.h"
 #include"AppliedForceGenerator.h"
 #include"ContactResolver.h"
+#include"ContactResolverIterator.h"
 #include"ParticleAnchor.h"
 #include"AnchoredSpring.h"
 #include<list>
@@ -21,8 +22,9 @@ public:
 	~PhysicsManager();
 
 	void setGravity(float, Vector);
-	void setLimit(int);
+	void setLimit(unsigned int);
 	void setOrigin(Vector);
+	void setContactLimit(unsigned int);
 
 	Vector getGravity();
 	int getLimit();
@@ -59,6 +61,7 @@ private:
 	void updateParticleList();
 
 	list<forcePair> forceRegistry;
+	ContactResolverIterator iterator;
 	GravityForceGenerator gravityGenerator;
 	int particleLimit;
 };
