@@ -9,7 +9,6 @@ Game::Game() : gWindow(sf::VideoMode(WINDOW_X, WINDOW_Y), "Newton's Cradle") {
 
     Particle* particle1 = new Particle(20.f, -170, 0, 80.f, 1.f, 40.f, sf::Color::Blue);
     physWorld.addParticle(particle1);
-
     physWorld.anchorWithCable(particle1, Vector(-170, WINDOW_Y / 2), 5, WINDOW_Y / 2);
 
     Particle* particle2 = new Particle(20.f, -85, 0, 80.f, 1.f, 40.f, sf::Color::Blue);

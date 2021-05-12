@@ -149,6 +149,12 @@ void PhysicsManager::anchorWithCable(Particle* particle, Vector anchorPoint, flo
 	addForce(particle, cable->forceGen);
 }
 
+void PhysicsManager::linkWithSpring(Particle* particleA, Particle* particleB, float springConst, float restLength) {
+	ParticleSpring* spring = new ParticleSpring(particleA, particleB, springConst, restLength);
+	linkList.push_back(spring);
+	addForce(particleA, spring->forceGen);
+}
+
 void PhysicsManager::linkWithRod(Particle* particleA, Particle* particleB) {
 	ParticleRod* rod = new ParticleRod(particleA, particleB);
 	linkList.push_back(rod);

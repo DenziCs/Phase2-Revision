@@ -153,6 +153,8 @@
     <ClCompile Include="Custom Classes\ParticleAnchor.cpp" />
     <ClCompile Include="Custom Classes\ParticleLink.cpp" />
     <ClCompile Include="Custom Classes\ParticleRod.cpp" />
+    <ClCompile Include="Custom Classes\ParticleSpring.cpp" />
+    <ClCompile Include="Custom Classes\ParticleSpringForceGenerator.cpp" />
     <ClCompile Include="Custom Classes\Utils.cpp" />
     <ClCompile Include="Custom Classes\Vector.cpp" />
     <ClCompile Include="Custom Classes\Game.cpp" />
@@ -173,6 +175,8 @@
     <ClInclude Include="Custom Classes\ParticleAnchor.h" />
     <ClInclude Include="Custom Classes\ParticleLink.h" />
     <ClInclude Include="Custom Classes\ParticleRod.h" />
+    <ClInclude Include="Custom Classes\ParticleSpring.h" />
+    <ClInclude Include="Custom Classes\ParticleSpringForceGenerator.h" />
     <ClInclude Include="Custom Classes\Utils.h" />
     <ClInclude Include="Custom Classes\Vector.h" />
     <ClInclude Include="Custom Classes\Game.h" />

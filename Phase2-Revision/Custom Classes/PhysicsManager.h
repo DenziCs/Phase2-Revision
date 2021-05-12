@@ -9,6 +9,7 @@
 #include"AnchoredSpring.h"
 #include"AnchoredCable.h"
 #include"ParticleLink.h"
+#include"ParticleSpring.h"
 #include"ParticleRod.h"
 #include<list>
 #include<vector>
