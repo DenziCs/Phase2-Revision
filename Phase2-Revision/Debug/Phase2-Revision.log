@@ -1,3 +1,13 @@
-﻿  Game.cpp
-C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\Game.cpp(5,44): warning C4305: 'argument': truncation from 'double' to 'float'
+﻿  AppliedForceGenerator.cpp
+  ContactResolver.cpp
+  Game.cpp
+  GravityForceGenerator.cpp
+  Particle.cpp
+C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\Particle.cpp(98,63): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\Particle.cpp(99,63): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  PhysicsManager.cpp
+C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\PhysicsManager.cpp(4,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\PhysicsManager.cpp(41,26): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
+  Generating Code...
   Phase2-Revision.vcxproj -> C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Debug\Phase2-Revision.exe

@@ -63,7 +63,7 @@ float Particle::getMass() {
 Vector Particle::getPosition() {
 	sf::Vector2f pos = psSprite->getPosition();
 	Vector position(pos.x, pos.y);
-	return position;
+	return asConventionalVector(position);
 }
 
 Vector Particle::getVelocity() {
@@ -116,5 +116,9 @@ void Particle::draw(sf::RenderWindow* pgWindow) {
 }
 
 Vector Particle::asWindowVector(Vector cVector) {
+	return Vector(cVector.x, -cVector.y);
+}
+
+Vector Particle::asConventionalVector(Vector cVector) {
 	return Vector(cVector.x, -cVector.y);
 }

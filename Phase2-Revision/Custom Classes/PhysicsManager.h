@@ -2,7 +2,9 @@
 #include"ForceGenerator.h"
 #include"GravityForceGenerator.h"
 #include"AppliedForceGenerator.h"
+#include"ContactResolver.h"
 #include<list>
+#include<vector>
 #include<SFML/Graphics.hpp>
 #include<time.h>
 #pragma once
@@ -26,7 +28,6 @@ public:
 	Vector asWindowPoint(Vector);
 
 	void addParticle(Particle*);
-	void addAnchorPoint(Particle*);
 
 	void addForce(Particle*, ForceGenerator*);
 	void removeForce(Particle*, ForceGenerator*);
@@ -35,11 +36,14 @@ public:
 	void applyToAll(Vector);
 	void addToAll(ForceGenerator*);
 
+	void addContact(Particle*, Particle*, float, float);
+
 	void updateForces();
 	void update(float);
 	void drawAll(sf::RenderWindow*);
 	
 	list<Particle*> particleList;
+	vector<ContactResolver*> contactList;
 private:
 	struct forcePair {
 		ForceGenerator* generator;

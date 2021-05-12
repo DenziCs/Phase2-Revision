@@ -14,7 +14,7 @@ public:
     Game();
     void run();
 
-    static const int WINDOW_X = 400;
+    static const int WINDOW_X = 800;
     static const int WINDOW_Y = 400;
     const sf::Time TimePerFrame = sf::seconds(1.f / 60.f);
 

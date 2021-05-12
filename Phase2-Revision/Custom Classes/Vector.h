@@ -11,7 +11,7 @@ namespace gdphys {
 		Vector();
 		Vector(float, float);
 		float getMagnitude();
-		void normalize();
+		Vector getNormalized();
 		Vector operator +(const Vector&);
 		Vector operator -(const Vector&);
 		Vector operator *(float);

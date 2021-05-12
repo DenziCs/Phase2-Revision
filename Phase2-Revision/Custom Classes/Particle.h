@@ -32,6 +32,7 @@ public:
 	sf::CircleShape* psSprite;
 private:
 	Vector asWindowVector(Vector);
+	Vector asConventionalVector(Vector);
 
 	float mass;
 	Vector velocity;

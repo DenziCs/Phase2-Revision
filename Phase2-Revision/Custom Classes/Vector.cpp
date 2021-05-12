@@ -17,12 +17,11 @@ float Vector::getMagnitude() {
 	return sqrt(pow(x, 2) + pow(y, 2));
 }
 
-void Vector::normalize() {
+Vector Vector::getNormalized() {
 	Vector normVector(this->x, this->y);
 	normVector.x = normVector.x / getMagnitude();
 	normVector.y = normVector.y / getMagnitude();
-	this->x = normVector.x;
-	this->y = normVector.y;
+	return normVector;
 }
 
 Vector Vector::operator +(const Vector& vector2) {
