@@ -5,6 +5,10 @@ PhysicsManager::PhysicsManager() {
 }
 
 PhysicsManager::~PhysicsManager() {
+	contactList.clear();
+	forceRegistry.clear();
+	anchorList.clear();
+	linkList.clear();
 	particleList.clear();
 }
 

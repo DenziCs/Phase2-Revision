@@ -1,15 +1,12 @@
-﻿  Game.cpp
-C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\Game.cpp(5,44): warning C4305: 'argument': truncation from 'double' to 'float'
-  PhysicsManager.cpp
+﻿  PhysicsManager.cpp
 C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\PhysicsManager.cpp(4,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\PhysicsManager.cpp(40,26): warning C4018: '<': signed/unsigned mismatch
-C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\PhysicsManager.cpp(89,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\PhysicsManager.cpp(93,25): warning C4018: '<': signed/unsigned mismatch
-C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\PhysicsManager.cpp(124,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\PhysicsManager.cpp(133,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\PhysicsManager.cpp(180,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\PhysicsManager.cpp(186,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\PhysicsManager.cpp(200,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\PhysicsManager.cpp(206,21): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
+C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\PhysicsManager.cpp(44,26): warning C4018: '<': signed/unsigned mismatch
+C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\PhysicsManager.cpp(93,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\PhysicsManager.cpp(97,25): warning C4018: '<': signed/unsigned mismatch
+C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\PhysicsManager.cpp(128,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\PhysicsManager.cpp(137,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\PhysicsManager.cpp(184,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\PhysicsManager.cpp(190,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\PhysicsManager.cpp(204,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\PhysicsManager.cpp(210,21): warning C4018: '<': signed/unsigned mismatch
   Phase2-Revision.vcxproj -> C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Debug\Phase2-Revision.exe
