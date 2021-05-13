@@ -215,6 +215,24 @@ void PhysicsManager::updateParticleList() {
 			list<Particle*>::iterator i = particleList.begin();
 			if ((*i)->destroyed()) {
 				forceRegistry.remove_if([i](forcePair f) {return f.target == *i; });
+
+				int oldSize = linkList.size();
+				for (int j = 0; j < oldSize; j++) {
+					if (linkList[j]->partners[0] == *i) {
+						linkList.erase(linkList.begin() + j);
+					}
+					else if (linkList[j]->partners[1] && linkList[j]->partners[1] == *i) {
+						linkList.erase(linkList.begin() + j);
+					}
+				}
+
+				oldSize = anchorList.size();
+				for (int j = 0; j < oldSize; j++) {
+					if (anchorList[j]->particle == *i) {
+						anchorList.erase(anchorList.begin() + j);
+					}
+				}
+
 				particleList.erase(i);
 			}
 		}
@@ -224,14 +242,25 @@ void PhysicsManager::updateParticleList() {
 				if ((*i)->destroyed()) {
 					forceRegistry.remove_if([i](forcePair f) {return f.target == *i; });
 
-					if (i != particleList.end()) {
-						list<Particle*>::iterator temp = i;
-						i++;
-						particleList.erase(temp);
+					int oldSize = linkList.size();
+					for (int j = 0; j < oldSize; j++) {
+						if (linkList[j]->partners[0] == *i) {
+							linkList.erase(linkList.begin() + j);
+						}
+						else if (linkList[j]->partners[1] && linkList[j]->partners[1] == *i) {
+							linkList.erase(linkList.begin() + j);
+						}
 					}
-					else particleList.pop_back();
+
+					oldSize = anchorList.size();
+					for (int j = 0; j < oldSize; j++) {
+						if (anchorList[j]->particle == *i) {
+							anchorList.erase(anchorList.begin() + j);
+						}
+					}
 				}
 			}
+			particleList.remove_if([](Particle* p) {return p->destroyed(); });
 		}
 	}
 }
