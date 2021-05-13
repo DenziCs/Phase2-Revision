@@ -38,7 +38,7 @@ private:
 	Vector acceleration;
 	Vector netForce;
 		// Default constructor yields the zero vector.
-	float lifespan = 5.f;
+	float lifespan;
 	float dampFactor = 1.f;
 	bool hasLifespan = false;
 	bool isDestroyed = false;

@@ -213,15 +213,23 @@ void PhysicsManager::updateParticleList() {
 	if (!particleList.empty()) {
 		if (particleList.size() == 1) {
 			list<Particle*>::iterator i = particleList.begin();
-			if ((*i)->destroyed()) particleList.erase(i);
+			if ((*i)->destroyed()) {
+				forceRegistry.remove_if([i](forcePair f) {return f.target == *i; });
+				particleList.erase(i);
+			}
 		}
 
 		else {
 			for (list<Particle*>::iterator i = particleList.begin(); i != particleList.end(); i++) {
 				if ((*i)->destroyed()) {
-					list<Particle*>::iterator temp = i;
-					i++;
-					particleList.erase(temp);
+					forceRegistry.remove_if([i](forcePair f) {return f.target == *i; });
+
+					if (i != particleList.end()) {
+						list<Particle*>::iterator temp = i;
+						i++;
+						particleList.erase(temp);
+					}
+					else particleList.pop_back();
 				}
 			}
 		}

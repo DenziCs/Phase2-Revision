@@ -26,15 +26,6 @@ Game::Game() : gWindow(sf::VideoMode(WINDOW_X, WINDOW_Y), "Newton's Cradle") {
     Particle* particle5 = new Particle(false, 20.f, 170, 0, 1.f, 40.f, sf::Color::Blue);
     physWorld.addParticle(particle5);
     physWorld.anchorWithCable(particle5, Vector(170, WINDOW_Y / 2), 5, WINDOW_Y / 2);
-
-    Particle* particle6 = new Particle(false, 20.f, -40, -80, 1.f, 5.f, sf::Color::Blue);
-    physWorld.addParticle(particle6);
-
-    Particle* particle7 = new Particle(false, 20.f, 40, -60, 1.f, 5.f, sf::Color::Blue);
-    physWorld.addParticle(particle7);
-
-    physWorld.linkWithSpring(particle6, particle7, 5, 0.5);
-    particle6->applyForce(Vector(20000, 0));
 };
 
 void Game::run() {
