@@ -10,6 +10,7 @@ Particle::Particle(
 	float x,
 	float y,
 	float damp,
+	float rest,
 
 	float radius,
 	sf::Color sColor
@@ -23,6 +24,7 @@ Particle::Particle(
 	mass = _mass;
 	psSprite->setPosition(Utils::toWindowPoint(Vector(x, y)));
 	dampFactor = damp;
+	restitution = rest;
 	
 	circle->setRadius(radius);
 	circle->setOrigin(sf::Vector2f(radius, radius));
@@ -47,6 +49,10 @@ void Particle::setVelocity(Vector v) {
 
 void Particle::setLifespan(float life) {
 	lifespan = life;
+}
+
+void Particle::setRestitution(float rest) {
+	restitution = rest;
 }
 
 void Particle::setRadius(float radius) {
@@ -79,6 +85,10 @@ Vector Particle::getAcceleration() {
 	return acceleration;
 }
 
+float Particle::getRestitution() {
+	return restitution;
+}
+
 float Particle::getRadius() {
 	sf::CircleShape* circle = (sf::CircleShape*)psSprite;
 	return circle->getRadius();
@@ -99,6 +109,7 @@ void Particle::applyForce(Vector appForce) {
 void Particle::resetForce() {
 	netForce = Vector(0, 0);
 	acceleration = Vector(0, 0);
+	netTorque = 0;
 }
 
 void Particle::update(float deltaTime) {
@@ -109,10 +120,17 @@ void Particle::update(float deltaTime) {
 	displacement.y = (0.5 * acceleration.y * powf(deltaTime, 2)) + (velocity.y * deltaTime);
 	psSprite->move(Utils::toWindowVector(displacement));
 
+	float deltaRotation = angularVelocity * deltaTime;
+	psSprite->rotate(Utils::inDegrees(deltaRotation));
+
 	velocity.x += acceleration.x * deltaTime;
 	velocity.x *= powf(dampFactor, deltaTime);
 	velocity.y += acceleration.y * deltaTime;
 	velocity.y *= powf(dampFactor, deltaTime);
+
+	float mI = getMomentOfInertia();
+	angularVelocity += -netTorque * deltaTime * (1.f / mI);
+	angularVelocity *= powf(angularDampFactor, deltaTime);
 
 	if (hasLifespan) {
 		lifespan -= deltaTime;

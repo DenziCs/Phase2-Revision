@@ -89,6 +89,47 @@ void PhysicsManager::addContact(Particle* particleA, Particle* particleB, float 
 	contactList.push_back(contact);
 }
 
+void PhysicsManager::getParticleOverlaps(Particle* a, Particle* b) {
+	float x1 = a->getPosition().x;
+	float x2 = b->getPosition().x;
+	float y1 = a->getPosition().y;
+	float y2 = b->getPosition().y;
+
+	//square magnitude
+	float mag2 = ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1));
+
+	//square of sum of radius
+	float rad2 = ((a)->getRadius() + (b)->getRadius()) * ((a)->getRadius() + (b)->getRadius());
+
+	//if sq mag = sq sum; touching
+	//if sq mag < sq sum; overlapping
+	if (mag2 <= rad2) {
+		Vector dir = Vector((a)->getPosition().x - (b)->getPosition().x, (a)->getPosition().y - (b)->getPosition().y);
+		dir = dir.getNormalized();
+		float r = rad2 - mag2;
+		float depth = sqrt(r);
+
+		float rest = a->getRestitution();
+		if (b->getRestitution() < a->getRestitution()) rest = b->getRestitution();
+		addContact(a, b, rest, depth);
+	}
+}
+
+void PhysicsManager::getRectangleOverlaps(Particle* a, Particle* b) {
+	switch (a->particleType) {
+	case Particle::RectangleRigidBody:
+		switch (b->particleType) {
+		case Particle::RectangleRigidBody:
+			break;
+		default:
+			break;
+		}
+		break;
+	default:
+		break;
+	}
+}
+
 void PhysicsManager::checkParticles() {
 	for (int i = 0; i < particleList.size() - 1; i++) {
 
@@ -98,25 +139,21 @@ void PhysicsManager::checkParticles() {
 
 			std::list<Particle*>::iterator b = std::next(particleList.begin(), j);
 
-			float x1 = (*a)->getPosition().x;
-			float x2 = (*b)->getPosition().x;
-			float y1 = (*a)->getPosition().y;
-			float y2 = (*b)->getPosition().y;
-
-			//square magnitude
-			float mag2 = ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1));
-
-			//square of sum of radius
-			float rad2 = ((*a)->getRadius() + (*b)->getRadius()) * ((*a)->getRadius() + (*b)->getRadius());
-
-			//if sq mag = sq sum; touching
-			//if sq mag < sq sum; overlapping
-			if (mag2 <= rad2) {
-				Vector dir = Vector((*a)->getPosition().x - (*b)->getPosition().x, (*a)->getPosition().y - (*b)->getPosition().y);
-				dir = dir.getNormalized();
-				float r = rad2 - mag2;
-				float depth = sqrt(r);
-				addContact(*a, *b, 1.f, depth);
+			switch ((*a)->particleType) {
+			case Particle::GenericParticle:
+			case Particle::CircleRigidBody:
+				switch ((*b)->particleType) {
+				case Particle::GenericParticle:
+				case Particle::CircleRigidBody:
+					getParticleOverlaps(*a, *b);
+					break;
+				default:
+					getRectangleOverlaps(*a, *b);
+				}
+				break;
+			default:
+				getRectangleOverlaps(*a, *b);
+				break;
 			}
 
 		}
