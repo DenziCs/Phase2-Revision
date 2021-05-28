@@ -1,2 +1,3 @@
-﻿  RectangularPrism.cpp
+﻿  Game.cpp
+C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\Game.cpp(46,34): warning C4305: 'argument': truncation from 'double' to 'float'
   Phase2-Revision.vcxproj -> C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Debug\Phase2-Revision.exe

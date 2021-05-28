@@ -124,13 +124,127 @@ void PhysicsManager::getRectangleOverlaps(Particle* a, Particle* b) {
 	case Particle::RectangleRigidBody:
 		switch (b->particleType) {
 		case Particle::RectangleRigidBody:
+			processRigidbodyContact((RectangularPrism*)a, b);
 			break;
 		default:
+			processRigidbodyContact((RectangularPrism*)a, (RectangularPrism*)b);
 			break;
 		}
 		break;
 	default:
+		processRigidbodyContact((RectangularPrism*)b, a);
 		break;
+	}
+}
+
+//rectangle and circle
+void PhysicsManager::processRigidbodyContact(RectangularPrism* a, Particle* b) {
+	Vector relVector = b->getPosition() - a->getPosition();
+	float invAngle = -(a->getRotation());
+	Vector locVector = Utils::rotatePoint(relVector, invAngle);
+
+	float minX = locVector.x;
+	if ((a->getWidth() / 2) < minX) {
+		minX = a->getWidth() / 2;
+	}
+	float maxX = minX;
+	if (maxX < -(a->getWidth() / 2)) {
+		maxX = -(a->getWidth() / 2);
+	}
+
+	float minY = locVector.y;
+	if ((a->getLength() / 2) < minY) {
+		minY = a->getLength() / 2;
+	}
+	float maxY = minY;
+	if (maxY < -(a->getLength() / 2)) {
+		maxY = -(a->getLength() / 2);
+	}
+
+	float D_x = locVector.x - maxX;
+	float D_y = locVector.y - maxY;
+
+	float sqD = (D_x * D_x) + (D_y * D_y);
+	if (sqD <= b->getRadius() * b->getRadius()) {
+		Vector dir = locVector * -1;
+		dir = dir.getNormalized();
+
+		float restitution = a->getRest();
+		if (b->getRestitution() < a->getRest()) {
+			restitution = b->getRestitution();
+		}
+
+		addContact(a, b, restitution, sqrt(sqD));
+	}
+}
+
+//two rectangles
+void PhysicsManager::processRigidbodyContact(RectangularPrism* a, RectangularPrism* b) {
+	std::vector<RectangularPrism*> rects;
+	rects.push_back(a);
+	rects.push_back(b);
+
+	bool ret = true;
+
+	for (int i = 0; i < rects.size(); i++) {
+		Vector ul = Vector(-rects[i]->getWidth() / 2, rects[i]->getLength() / 2);
+		Vector ll = Vector(-rects[i]->getWidth() / 2, -rects[i]->getLength() / 2);
+		Vector ur = Vector(rects[i]->getWidth() / 2, rects[i]->getLength() / 2);
+		Vector lr = Vector(rects[i]->getWidth() / 2, -rects[i]->getLength() / 2);
+
+		rects[i]->points[0] = Utils::rotatePoint(ul, rects[i]->getRotation()) + rects[i]->getPosition();
+		rects[i]->points[1] = Utils::rotatePoint(ur, rects[i]->getRotation()) + rects[i]->getPosition();
+		rects[i]->points[2] = (Utils::rotatePoint(lr, rects[i]->getRotation()) + rects[i]->getPosition());
+		rects[i]->points[3] = (Utils::rotatePoint(ll, rects[i]->getRotation()) + rects[i]->getPosition());
+	}
+
+	for (int i = 0; i < rects.size(); i++) {
+		for (int e1 = 0; e1 < 4; e1++) {
+			int e2 = (e1 + 1) % 4;
+			Vector p1 = rects[i]->points[e1];
+			Vector p2 = rects[i]->points[e2];
+
+			Vector projectionNormal = Vector(p2.y - p1.y, p1.x - p2.x);
+
+			//first rect
+			float minA = projectionNormal.dotProduct(rects[0]->points[0]);
+			float maxA = projectionNormal.dotProduct(rects[0]->points[0]);
+
+			for (int h = 1; h < 4; h++) {
+				float proj = projectionNormal.dotProduct(rects[0]->points[h]);
+
+				if (proj < minA) minA = proj;
+				if (proj > maxA) maxA = proj;
+			}
+
+			//second rect
+			float minB = projectionNormal.dotProduct(rects[1]->points[0]);
+			float maxB = projectionNormal.dotProduct(rects[1]->points[0]);
+
+			for (int h = 1; h < 4; h++) {
+				float proj = projectionNormal.dotProduct(rects[1]->points[h]);
+
+				if (proj < minB) minB = proj;
+				if (proj > maxB) maxB = proj;
+			}
+
+			//check if test fail
+			if (maxA < minB || maxB < minA) {
+				ret = false;
+				//end loop to save calls
+				break;
+			}
+
+			if (ret) {
+				Vector dir = a->getPosition() - b->getPosition();
+				dir = dir.getNormalized();
+
+				float rest = a->getRestitution();
+				if (b->getRestitution() < a->getRestitution()) rest = b->getRestitution();
+
+				addContact(a, b, rest, 0);
+			}
+		}
 	}
 }
 
@@ -312,6 +426,7 @@ void PhysicsManager::updateParticleList() {
 	}
 }
 
+/*
 void PhysicsManager::generateParticleContacts(Particle* a, Particle* b) {
 	float x1 = (a)->getPosition().x;
 	float x2 = (b)->getPosition().x;
@@ -334,14 +449,10 @@ void PhysicsManager::generateParticleContacts(Particle* a, Particle* b) {
 		addContact(a, b, 1.f, depth);
 	}
 }
+*/
 
+/*
 void PhysicsManager::generateRigidbodyContacts(Particle* a, Particle* b) {
-	/*
-		GenericParticle = 0,
-		GenericRigidBody = 1,
-		CircleRigidBody = 2,
-		RectangleRigidBody = 3
-	*/
 
 	//for 2 circles or a circle and particle
 	if ((a->particleType == 2 && b->particleType == 2) ||
@@ -370,109 +481,10 @@ void PhysicsManager::generateRigidbodyContacts(Particle* a, Particle* b) {
 		}
 	}
 }
-
-//rectangle and circle
-void PhysicsManager::processRigidbodyContact(RectangularPrism* a, Particle* b) {
-	Vector relVector = b->getPosition() - a->getPosition();
-	float invAngle = -(a->getRotation());
-	Vector locVector = Utils::rotatePoint(relVector, invAngle);
-
-	float minX = locVector.x;
-	if ((a->getWidth() / 2) < minX) {
-		minX = a->getWidth() / 2;
-	}
-	float maxX = minX;
-	if (maxX < -(a->getWidth() / 2)) {
-		maxX = -(a->getWidth() / 2);
-	}
-
-	float minY = locVector.y;
-	if ((a->getLength() / 2) < minY) {
-		minY = a->getLength() / 2;
-	}
-	float maxY = minY;
-	if (maxY < -(a->getLength() / 2)) {
-		maxY = -(a->getLength() / 2);
-	}
-
-	float D_x = locVector.x - maxX;
-	float D_y = locVector.y - maxY;
-
-	bool col = ((D_x * D_x) + (D_y + D_y)) <= (b->getRadius() * b->getRadius());
-	float depth = (D_x * D_x) + (D_y + D_y);
-
-	if (col) {
-		Vector dir = locVector * -1;
-		dir = dir.getNormalized();
-
-		float restitution = a->getRest();
-		if (b->getRestitution() < a->getRest()) {
-			restitution = b->getRestitution();
-		}
-
-		addContact(a, b, restitution, depth);
-	}
-}
-
-//two rectangles
-void PhysicsManager::processRigidbodyContact(RectangularPrism* a, RectangularPrism* b) {
-	std::vector<RectangularPrism*> rects;
-	rects.push_back(a);
-	rects.push_back(b);
-
-	bool ret = true;
-
-	for (int i = 0; i < rects.size(); i++) {
-		for (int e1 = 0; e1 < 4; e1++) {
-			int e2 = (e1 + 1) % 4;
-			Vector p1 = rects[i]->points[e1];
-			Vector p2 = rects[i]->points[e2];
-			
-			Vector projectionNormal = Vector(p2.y - p1.y, p1.x - p2.x);
-
-			//first rect
-			float minA = projectionNormal.dotProduct(rects[0]->points[0]);
-			float maxA = projectionNormal.dotProduct(rects[0]->points[0]);
-
-			for (int h = 1; h < 4; h++) {
-				float proj = projectionNormal.dotProduct(rects[0]->points[h]);
-
-				if (proj < minA) minA = proj;
-				if (proj > maxA) maxA = proj;
-			}
-
-			//second rect
-			float minB = projectionNormal.dotProduct(rects[1]->points[0]);
-			float maxB = projectionNormal.dotProduct(rects[1]->points[0]);
-
-			for (int h = 1; h < 4; h++) {
-				float proj = projectionNormal.dotProduct(rects[1]->points[h]);
-
-				if (proj < minB) minB = proj;
-				if (proj > maxB) maxB = proj;
-			}
-
-			//check if test fail
-			if (maxA < minB || maxB < minA) {
-				ret = false;
-				//end loop to save calls
-				break;
-			}
-
-			if (ret) {
-				Vector dir = a->getPosition() - b->getPosition();
-				dir = dir.getNormalized();
-
-				float rest = a->getRestitution();
-				if (b->getRestitution() < a->getRestitution()) rest = b->getRestitution();
-
-				addContact(a, b, rest, 0);
-			}
-		}
-	}
-}
+*/
 
 //two circles
+/*
 void PhysicsManager::processRigidbodyContact(Particle* a, Particle* b) {
 	float x1 = (a)->getPosition().x;
 	float x2 = (b)->getPosition().x;
@@ -495,3 +507,4 @@ void PhysicsManager::processRigidbodyContact(Particle* a, Particle* b) {
 		addContact(a, b, 1.f, depth);
 	}
 }
+*/

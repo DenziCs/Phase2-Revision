@@ -50,6 +50,8 @@ public:
 	void addContact(Particle*, Particle*, float restitution, float depth);
 	void getParticleOverlaps(Particle*, Particle*);
 	void getRectangleOverlaps(Particle*, Particle*);
+	void processRigidbodyContact(RectangularPrism*, RectangularPrism*);
+	void processRigidbodyContact(RectangularPrism*, Particle*);
 	void checkParticles();
 	void checkAnchors();
 	void checkLinks();
@@ -63,13 +65,6 @@ public:
 	void updateForces();
 	void update(float);
 	void drawAll(sf::RenderWindow*);
-
-	void generateParticleContacts(Particle* a, Particle* b);	//generate contacts when both are particles
-	void generateRigidbodyContacts(Particle* a, Particle* b);	//generate contacts when one or both are rigidbodies
-
-	void processRigidbodyContact(RectangularPrism* a, RectangularPrism* b);
-	void processRigidbodyContact(RectangularPrism* a, Particle* b);
-	void processRigidbodyContact(Particle* a, Particle* b);
 	
 	list<Particle*> particleList;
 	vector<ContactResolver*> contactList;
