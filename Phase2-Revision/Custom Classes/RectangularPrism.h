@@ -21,4 +21,7 @@ public:
 	float getWidth();
 	float getLength();
 	float getMomentOfInertia();
+	float getRest();
+
+	std::vector<Vector> points;
 };

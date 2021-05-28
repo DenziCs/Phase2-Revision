@@ -55,3 +55,7 @@ float RectangularPrism::getMomentOfInertia() {
 	float length = getLength();
 	return (1.f / 12.f) * mass * (width * width + length * length);
 }
+
+float RectangularPrism::getRest() {
+	return restitution;
+}
