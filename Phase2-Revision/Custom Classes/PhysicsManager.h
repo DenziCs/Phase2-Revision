@@ -18,7 +18,6 @@
 #include<vector>
 #include<SFML/Graphics.hpp>
 #include<time.h>
-#include<iostream>
 #pragma once
 using namespace std;
 using namespace gdphys;

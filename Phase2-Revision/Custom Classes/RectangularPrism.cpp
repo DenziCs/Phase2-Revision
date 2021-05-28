@@ -29,7 +29,6 @@ RectangularPrism::RectangularPrism(
 	psSprite->setPosition(Utils::toWindowPoint(Vector(x, y)));
 	rectangle->setFillColor(sColor);
 
-	/*
 	Vector ul = Vector(-width / 2, length / 2);
 	Vector ll = Vector(-width / 2, -length / 2);
 	Vector ur = Vector(width / 2, length / 2);
@@ -39,7 +38,6 @@ RectangularPrism::RectangularPrism(
 	points[1] = Utils::rotatePoint(ur, this->getRotation()) + this->getPosition();
 	points[2] = (Utils::rotatePoint(lr, this->getRotation()) + this->getPosition());
 	points[3] = (Utils::rotatePoint(ll, this->getRotation()) + this->getPosition());
-	*/
 }
 
 float RectangularPrism::getWidth() {

@@ -127,7 +127,7 @@ void PhysicsManager::processRigidbodyContact(RectangularPrism* a, Particle* b) {
 			restitution = b->getRestitution();
 		}
 
-		addContact(a, b, restitution, sqrt(sqD));
+		addContact(a, b, restitution, 0);
 	}
 }
 
@@ -159,7 +159,7 @@ void PhysicsManager::processRigidbodyContact(RectangularPrism* a, RectangularPri
 
 			Vector projectionNormal = Vector(p2.y - p1.y, p1.x - p2.x);
 
-			//first rect
+			// First rectangle.
 			float minA = projectionNormal.dotProduct(rects[0]->points[0]);
 			float maxA = projectionNormal.dotProduct(rects[0]->points[0]);
 
@@ -170,7 +170,7 @@ void PhysicsManager::processRigidbodyContact(RectangularPrism* a, RectangularPri
 				if (proj > maxA) maxA = proj;
 			}
 
-			//second rect
+			// Second rectangle.
 			float minB = projectionNormal.dotProduct(rects[1]->points[0]);
 			float maxB = projectionNormal.dotProduct(rects[1]->points[0]);
 
@@ -181,10 +181,10 @@ void PhysicsManager::processRigidbodyContact(RectangularPrism* a, RectangularPri
 				if (proj > maxB) maxB = proj;
 			}
 
-			//check if test fail
+			// Check if the test fails.
 			if (maxA < minB || maxB < minA) {
 				ret = false;
-				//end loop to save calls
+				// End loop to save calls.
 				break;
 			}
 		}
@@ -204,14 +204,14 @@ void PhysicsManager::getParticleOverlaps(Particle* a, Particle* b) {
 	float y1 = a->getPosition().y;
 	float y2 = b->getPosition().y;
 
-	//square magnitude
+	// The magnitude of their distance, squared.
 	float mag2 = ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1));
 
-	//square of sum of radius
+	// The sum of the two circles' radii, squared.
 	float rad2 = ((a)->getRadius() + (b)->getRadius()) * ((a)->getRadius() + (b)->getRadius());
 
-	//if sq mag = sq sum; touching
-	//if sq mag < sq sum; overlapping
+	// If sq mag = sq sum, touching
+	// If sq mag < sq sum, overlapping
 	if (mag2 <= rad2) {
 		float r = rad2 - mag2;
 		float depth = sqrt(r);
@@ -417,86 +417,3 @@ void PhysicsManager::updateParticleList() {
 		}
 	}
 }
-
-/*
-void PhysicsManager::generateParticleContacts(Particle* a, Particle* b) {
-	float x1 = (a)->getPosition().x;
-	float x2 = (b)->getPosition().x;
-	float y1 = (a)->getPosition().y;
-	float y2 = (b)->getPosition().y;
-
-	//square magnitude
-	float mag2 = ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1));
-
-	//square of sum of radius
-	float rad2 = ((a)->getRadius() + (b)->getRadius()) * ((a)->getRadius() + (b)->getRadius());
-
-	//if sq mag = sq sum; touching
-	//if sq mag < sq sum; overlapping
-	if (mag2 <= rad2) {
-		Vector dir = Vector((a)->getPosition().x - (b)->getPosition().x, (a)->getPosition().y - (b)->getPosition().y);
-		dir = dir.getNormalized();
-		float r = rad2 - mag2;
-		float depth = sqrt(r);
-		addContact(a, b, 1.f, depth);
-	}
-}
-*/
-
-/*
-void PhysicsManager::generateRigidbodyContacts(Particle* a, Particle* b) {
-
-	//for 2 circles or a circle and particle
-	if ((a->particleType == 2 && b->particleType == 2) ||
-		(a->particleType == 2 && b->particleType == 0) ||
-		(a->particleType == 0 && b->particleType == 2))
-	{
-		//both objects can be considered a circle
-		generateParticleContacts(a, b);
-	}
-
-	//2 rectangle rigidbodies
-	else if (a->particleType == 3 && b->particleType == 3) {
-		processRigidbodyContact(a, b);
-	}
-
-	//rect and circle
-	else {
-		//a is rect
-		if (a->particleType == 3) {
-			processRigidbodyContact(a, b);
-		}
-
-		//b is rect
-		else {
-			processRigidbodyContact(b, a);
-		}
-	}
-}
-*/
-
-//two circles
-/*
-void PhysicsManager::processRigidbodyContact(Particle* a, Particle* b) {
-	float x1 = (a)->getPosition().x;
-	float x2 = (b)->getPosition().x;
-	float y1 = (a)->getPosition().y;
-	float y2 = (b)->getPosition().y;
-
-	//square magnitude
-	float mag2 = ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1));
-
-	//square of sum of radius
-	float rad2 = ((a)->getRadius() + (b)->getRadius()) * ((a)->getRadius() + (b)->getRadius());
-
-	//if sq mag = sq sum; touching
-	//if sq mag < sq sum; overlapping
-	if (mag2 <= rad2) {
-		Vector dir = Vector((a)->getPosition().x - (b)->getPosition().x, (a)->getPosition().y - (b)->getPosition().y);
-		dir = dir.getNormalized();
-		float r = rad2 - mag2;
-		float depth = sqrt(r);
-		addContact(a, b, 1.f, depth);
-	}
-}
-*/
