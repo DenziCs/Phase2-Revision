@@ -17,7 +17,6 @@ public:
 		RectangleRigidBody = 3
 	};
 
-	Particle();
 	Particle(bool lifespanIsOn,
 		float _mass,
 		float x,
@@ -56,6 +55,8 @@ public:
 	sf::Shape* psSprite;
 	ParticleType particleType;
 protected:
+	Particle();
+
 	float mass;
 	Vector velocity;
 	Vector acceleration;
@@ -63,11 +64,10 @@ protected:
 	float netTorque = 0;
 
 	float lifespan;
-	float restitution;
+	float restitution = 1.f;
 	float dampFactor = 1.f;
 	float angularDampFactor = 1.f;
 	float angularVelocity = 0.f;
-	float rotation = 0.f;
 
 	bool hasLifespan = false;
 	bool isDestroyed = false;

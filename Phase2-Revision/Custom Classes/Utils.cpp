@@ -17,3 +17,11 @@ Vector Utils::toPhysicsVector(sf::Vector2f v) {
 sf::Vector2f Utils::toWindowVector(Vector v) {
 	return sf::Vector2f(v.x, -v.y);
 }
+
+float Utils::inDegrees(float theta) {
+	return theta * (180.f / acos(-1.f));
+}
+
+float Utils::inRadians(float theta) {
+	return theta * (acos(-1.f) / 180.f);
+}

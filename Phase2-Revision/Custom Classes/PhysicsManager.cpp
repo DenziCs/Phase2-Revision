@@ -108,7 +108,10 @@ void PhysicsManager::getParticleOverlaps(Particle* a, Particle* b) {
 		dir = dir.getNormalized();
 		float r = rad2 - mag2;
 		float depth = sqrt(r);
-		addContact(a, b, 1.f, depth);
+
+		float rest = a->getRestitution();
+		if (b->getRestitution() < a->getRestitution()) rest = b->getRestitution();
+		addContact(a, b, rest, depth);
 	}
 }
 

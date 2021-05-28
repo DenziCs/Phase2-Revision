@@ -109,6 +109,7 @@ void Particle::applyForce(Vector appForce) {
 void Particle::resetForce() {
 	netForce = Vector(0, 0);
 	acceleration = Vector(0, 0);
+	netTorque = 0;
 }
 
 void Particle::update(float deltaTime) {
@@ -119,10 +120,17 @@ void Particle::update(float deltaTime) {
 	displacement.y = (0.5 * acceleration.y * powf(deltaTime, 2)) + (velocity.y * deltaTime);
 	psSprite->move(Utils::toWindowVector(displacement));
 
+	float deltaRotation = angularVelocity * deltaTime;
+	psSprite->rotate(Utils::inDegrees(deltaRotation));
+
 	velocity.x += acceleration.x * deltaTime;
 	velocity.x *= powf(dampFactor, deltaTime);
 	velocity.y += acceleration.y * deltaTime;
 	velocity.y *= powf(dampFactor, deltaTime);
+
+	float mI = getMomentOfInertia();
+	angularVelocity += -netTorque * deltaTime * (1.f / mI);
+	angularVelocity *= powf(angularDampFactor, deltaTime);
 
 	if (hasLifespan) {
 		lifespan -= deltaTime;
