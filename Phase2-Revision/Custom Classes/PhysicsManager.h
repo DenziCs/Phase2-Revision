@@ -32,6 +32,7 @@ public:
 	void setLimit(unsigned int);
 	void setOrigin(Vector);
 	void setContactLimit(unsigned int);
+	void setDrawLinks(bool);
 
 	Vector getGravity();
 	int getLimit();
@@ -79,4 +80,5 @@ private:
 	ContactResolverIterator iterator;
 	GravityForceGenerator gravityGenerator;
 	int particleLimit;
+	bool drawLinks = true;
 };

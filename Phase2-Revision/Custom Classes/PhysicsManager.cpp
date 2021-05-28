@@ -28,6 +28,10 @@ void PhysicsManager::setContactLimit(unsigned int limit) {
 	iterator.max_iterations = limit;
 }
 
+void PhysicsManager::setDrawLinks(bool flag) {
+	drawLinks = flag;
+}
+
 Vector PhysicsManager::getGravity() {
 	return gravityGenerator.getGravity();
 }
@@ -237,15 +241,17 @@ void PhysicsManager::drawAll(sf::RenderWindow* pgWindow) {
 		}
 	}
 
-	if (!anchorList.empty()) {
-		for (int i = 0; i < anchorList.size(); i++) {
-			anchorList[i]->draw(pgWindow);
+	if (drawLinks) {
+		if (!anchorList.empty()) {
+			for (int i = 0; i < anchorList.size(); i++) {
+				anchorList[i]->draw(pgWindow);
+			}
 		}
-	}
 
-	if (!linkList.empty()) {
-		for (int i = 0; i < linkList.size(); i++) {
-			linkList[i]->draw(pgWindow);
+		if (!linkList.empty()) {
+			for (int i = 0; i < linkList.size(); i++) {
+				linkList[i]->draw(pgWindow);
+			}
 		}
 	}
 }
