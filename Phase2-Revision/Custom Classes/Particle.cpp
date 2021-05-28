@@ -88,6 +88,10 @@ bool Particle::destroyed() {
 	return isDestroyed;
 }
 
+float Particle::getMomentOfInertia() {
+	return 0.4 * mass * getRadius() * getRadius();
+}
+
 void Particle::applyForce(Vector appForce) {
 	netForce = netForce + appForce;
 }

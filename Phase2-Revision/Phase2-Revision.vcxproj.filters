@@ -72,6 +72,12 @@
     <ClCompile Include="Custom Classes\ParticleSpring.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Custom Classes\RigidBody.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Custom Classes\RectangularPrism.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Custom Classes\Vector.h">
@@ -129,6 +135,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Custom Classes\ParticleSpring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Custom Classes\RigidBody.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Custom Classes\RectangularPrism.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

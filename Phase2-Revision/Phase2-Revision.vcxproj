@@ -161,6 +161,8 @@
     <ClCompile Include="Custom Classes\Particle.cpp" />
     <ClCompile Include="Custom Classes\PhysicsManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Custom Classes\RigidBody.cpp" />
+    <ClCompile Include="Custom Classes\RectangularPrism.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Custom Classes\AnchoredCable.h" />
@@ -182,6 +184,8 @@
     <ClInclude Include="Custom Classes\Game.h" />
     <ClInclude Include="Custom Classes\Particle.h" />
     <ClInclude Include="Custom Classes\PhysicsManager.h" />
+    <ClInclude Include="Custom Classes\RigidBody.h" />
+    <ClInclude Include="Custom Classes\RectangularPrism.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

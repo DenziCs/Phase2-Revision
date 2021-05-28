@@ -38,14 +38,13 @@ public:
 	virtual float getMomentOfInertia();
 
 	void applyForce(Vector);
-	// void applyForceAtPoint(Vector, Vector);
 	void resetForce();
 	void update(float);
 	void draw(sf::RenderWindow*);
 
 	sf::Shape* psSprite;
 	ParticleType particleType;
-private:
+protected:
 	float mass;
 	Vector velocity;
 	Vector acceleration;
