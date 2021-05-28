@@ -50,6 +50,8 @@ float RectangularPrism::getLength() {
 	return rect->getSize().y;
 }
 
-float RectangularPrism::getRest() {
-	return restitution;
+float RectangularPrism::getMomentOfInertia() {
+	float width = getWidth();
+	float length = getLength();
+	return (1.f / 12.f) * mass * (width * width + length * length);
 }

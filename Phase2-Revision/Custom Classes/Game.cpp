@@ -29,11 +29,19 @@ Game::Game() : gWindow(sf::VideoMode(WINDOW_X, WINDOW_Y), "Newton's Cradle") {
     physWorld.anchorWithCable(particle5, Vector(170, WINDOW_Y / 2), 5, WINDOW_Y / 2);
     */
 
-    RectangularPrism* prism = new RectangularPrism(false, 20.f, 0, 0, 1.f, 1.f, 1.f, 40.f, 10.f, sf::Color::Blue);
+    RectangularPrism* prism = new RectangularPrism(false, 20.f, 0, 0, 1.f, 0.9f, 1.f, 40.f, 10.f, sf::Color::Blue);
     physWorld.addParticle(prism);
-    // physWorld.anchorWithCable(prism, Vector(0, WINDOW_Y / 2), 5, WINDOW_Y / 2);
-    prism->setRotation(0);
-    prism->applyForceAtPoint(Vector(20, 5), Vector(0, 40000));
+    prism->setRotation(1.5708);
+
+    Sphere* sphere = new Sphere(false, 20.f, -60, 10, 1.f, 0.9f, 1.f, 20.f, sf::Color::Red);
+    physWorld.addParticle(sphere);
+    sphere->setRotation(1.5708);
+
+    physWorld.linkWithRod(prism, sphere);
+    prism->applyForceAtPoint(Vector(5, 20), Vector(-40000, 0));
+    prism->applyForce(Vector(0, 50000));
+
+    physWorld.setDrawLinks(false);
 };
 
 void Game::run() {
