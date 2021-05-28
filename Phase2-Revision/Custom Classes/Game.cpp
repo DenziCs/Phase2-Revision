@@ -43,7 +43,7 @@ Game::Game() : gWindow(sf::VideoMode(WINDOW_X, WINDOW_Y), "Newton's Cradle") {
 
     RectangularPrism* particle4 = new RectangularPrism(false, 10.f, 200, 0, 0.9f, 1.f, 1.f, 40.f, 30.f, sf::Color::Blue);
     physWorld.addParticle(particle4);
-    particle4->setRotation(0.7854);
+    particle4->setRotation(1.0472);
     particle4->applyForce(Vector(-40000, 0));
 
     RectangularPrism* particle5 = new RectangularPrism(false, 10.f, -200, -100, 0.9f, 1.f, 1.f, 40.f, 30.f, sf::Color::Blue);
@@ -53,7 +53,7 @@ Game::Game() : gWindow(sf::VideoMode(WINDOW_X, WINDOW_Y), "Newton's Cradle") {
 
     RectangularPrism* particle6 = new RectangularPrism(false, 10.f, 200, -100, 0.9f, 1.f, 1.f, 40.f, 30.f, sf::Color::White);
     physWorld.addParticle(particle6);
-    particle6->setRotation(0.7854);
+    particle6->setRotation(0.5236);
     particle6->applyForce(Vector(-40000, 0));
 
     physWorld.setDrawLinks(false);
