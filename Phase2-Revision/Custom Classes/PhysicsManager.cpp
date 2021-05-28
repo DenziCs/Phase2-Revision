@@ -423,8 +423,8 @@ void PhysicsManager::processRigidbodyContact(RectangularPrism* a, RectangularPri
 	bool ret = true;
 
 	for (int i = 0; i < rects.size(); i++) {
-		for (int e1 = 0; e1 < rects[i]->points.size(); e1++) {
-			int e2 = (e1 + 1) % rects[i]->points.size();
+		for (int e1 = 0; e1 < 4; e1++) {
+			int e2 = (e1 + 1) % 4;
 			Vector p1 = rects[i]->points[e1];
 			Vector p2 = rects[i]->points[e2];
 			
@@ -434,7 +434,7 @@ void PhysicsManager::processRigidbodyContact(RectangularPrism* a, RectangularPri
 			float minA = projectionNormal.dotProduct(rects[0]->points[0]);
 			float maxA = projectionNormal.dotProduct(rects[0]->points[0]);
 
-			for (int h = 1; h < rects[0]->points.size(); h++) {
+			for (int h = 1; h < 4; h++) {
 				float proj = projectionNormal.dotProduct(rects[0]->points[h]);
 
 				if (proj < minA) minA = proj;
@@ -445,7 +445,7 @@ void PhysicsManager::processRigidbodyContact(RectangularPrism* a, RectangularPri
 			float minB = projectionNormal.dotProduct(rects[1]->points[0]);
 			float maxB = projectionNormal.dotProduct(rects[1]->points[0]);
 
-			for (int h = 1; h < rects[1]->points.size(); h++) {
+			for (int h = 1; h < 4; h++) {
 				float proj = projectionNormal.dotProduct(rects[1]->points[h]);
 
 				if (proj < minB) minB = proj;

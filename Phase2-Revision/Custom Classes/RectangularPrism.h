@@ -23,5 +23,5 @@ public:
 	float getMomentOfInertia();
 	float getRest();
 
-	std::vector<Vector> points;
+	Vector points[4];
 };
