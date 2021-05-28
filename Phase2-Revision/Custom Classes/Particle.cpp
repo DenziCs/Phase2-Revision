@@ -114,7 +114,7 @@ void Particle::resetForce() {
 
 void Particle::update(float deltaTime) {
 	Vector displacement;
-	acceleration = netForce * (1 / mass);
+	acceleration = netForce * (1.f / mass);
 
 	displacement.x = (0.5 * acceleration.x * powf(deltaTime, 2)) + (velocity.x * deltaTime);
 	displacement.y = (0.5 * acceleration.y * powf(deltaTime, 2)) + (velocity.y * deltaTime);

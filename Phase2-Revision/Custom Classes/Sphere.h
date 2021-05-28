@@ -4,5 +4,16 @@
 class Sphere : public RigidBody
 {
 public:
-	Sphere();
+	Sphere(
+		bool lifespanIsOn,
+		float _mass,
+		float x,
+		float y,
+		float damp,
+		float angleDamp,
+		float rest,
+
+		float radius,
+		sf::Color sColor
+	);
 };
