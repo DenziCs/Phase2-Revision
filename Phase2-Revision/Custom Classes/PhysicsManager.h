@@ -12,6 +12,8 @@
 #include"ParticleSpring.h"
 #include"ParticleRod.h"
 #include"RigidBody.h"
+#include"Sphere.h"
+#include"RectangularPrism.h"
 #include<list>
 #include<vector>
 #include<SFML/Graphics.hpp>
