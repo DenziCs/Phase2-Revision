@@ -116,7 +116,7 @@ void PhysicsManager::checkParticles() {
 				dir = dir.getNormalized();
 				float r = rad2 - mag2;
 				float depth = sqrt(r);
-				addContact(*a, *b, 1.f, depth);
+				addContact(*a, *b, 0.6f, depth);
 			}
 
 		}

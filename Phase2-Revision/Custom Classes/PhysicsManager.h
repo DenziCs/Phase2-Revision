@@ -8,6 +8,7 @@
 #include"ParticleAnchor.h"
 #include"AnchoredSpring.h"
 #include"AnchoredCable.h"
+#include"AnchoredRod.h"
 #include"ParticleLink.h"
 #include"ParticleSpring.h"
 #include"ParticleRod.h"

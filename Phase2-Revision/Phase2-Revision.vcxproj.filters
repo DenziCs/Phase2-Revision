@@ -72,6 +72,9 @@
     <ClCompile Include="Custom Classes\ParticleSpring.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Custom Classes\AnchoredRod.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Custom Classes\Vector.h">
@@ -131,5 +134,13 @@
     <ClInclude Include="Custom Classes\ParticleSpring.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Custom Classes\AnchoredRod.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Textures\shuriken.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

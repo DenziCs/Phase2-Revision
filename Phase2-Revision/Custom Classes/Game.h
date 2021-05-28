@@ -15,15 +15,23 @@ public:
     void run();
 
     static const int WINDOW_X = 800;
-    static const int WINDOW_Y = 400;
+    static const int WINDOW_Y = 600;
     const sf::Time TimePerFrame = sf::seconds(1.f / 60.f);
 
     PhysicsManager physWorld;
+
+    float totalDegrees = 0.f;
+    float totalTime = 0.f;
+    float finalVelocity = 0.f;
 private:
     void processEvents();
     void update(sf::Time);
     void render();
 
     sf::RenderWindow gWindow;
-    bool push = false;
+
+    sf::Sprite* shuriken;
+    Particle* reference = nullptr;
+    Particle* origin = nullptr;
+    float previousTheta = 0.f;
 };
