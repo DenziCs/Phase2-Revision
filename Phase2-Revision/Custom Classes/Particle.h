@@ -17,7 +17,8 @@ public:
 		RectangleRigidBody = 3
 	};
 
-	Particle(bool lifespanIsOn,
+	Particle(
+		bool lifespanIsOn,
 		float _mass,
 		float x,
 		float y,

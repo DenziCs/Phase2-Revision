@@ -10,10 +10,14 @@ public:
 		float x,
 		float y,
 		float damp,
+		float angleDamp,
 		float rest,
 
 		float width,
 		float length,
 		sf::Color sColor
 	);
+
+	float getWidth();
+	float getLength();
 };

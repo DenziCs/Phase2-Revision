@@ -6,7 +6,10 @@ class RigidBody : public Particle
 public:
 	RigidBody() : Particle() {}
 
-	void setRotation(float theta);
-	float getRotation(float theta);
+	void setRotation(float);
+	void setAngularDampFactor(float);
+	
+	float getRotation();
+
 	void applyForceAtPoint(Vector, Vector);
 };
