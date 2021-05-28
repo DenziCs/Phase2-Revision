@@ -44,17 +44,17 @@ public:
 	void applyToAll(Vector);
 	void addToAll(ForceGenerator*);
 
-	void addContact(Particle*, Particle*, float, float);
+	void addContact(Particle*, Particle*, float restitution, float depth);
 	void getParticleOverlaps(Particle*, Particle*);
-	void getRigidBodyOverlaps();
+	void getRectangleOverlaps(Particle*, Particle*);
 	void checkParticles();
 	void checkAnchors();
 	void checkLinks();
 
-	void anchorWithSpring(Particle*, Vector, float, float);
-	void anchorWithCable(Particle*, Vector, float, float);
+	void anchorWithSpring(Particle*, Vector anchorPoint, float springConst, float restLength);
+	void anchorWithCable(Particle*, Vector anchorPoint, float springConst, float restLength);
 
-	void linkWithSpring(Particle*, Particle*, float, float);
+	void linkWithSpring(Particle*, Particle*, float springConst, float restLength);
 	void linkWithRod(Particle*, Particle*);
 
 	void updateForces();

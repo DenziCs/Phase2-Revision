@@ -112,7 +112,20 @@ void PhysicsManager::getParticleOverlaps(Particle* a, Particle* b) {
 	}
 }
 
-void PhysicsManager::getRigidBodyOverlaps() {}
+void PhysicsManager::getRectangleOverlaps(Particle* a, Particle* b) {
+	switch (a->particleType) {
+	case Particle::RectangleRigidBody:
+		switch (b->particleType) {
+		case Particle::RectangleRigidBody:
+			break;
+		default:
+			break;
+		}
+		break;
+	default:
+		break;
+	}
+}
 
 void PhysicsManager::checkParticles() {
 	for (int i = 0; i < particleList.size() - 1; i++) {
@@ -125,13 +138,18 @@ void PhysicsManager::checkParticles() {
 
 			switch ((*a)->particleType) {
 			case Particle::GenericParticle:
+			case Particle::CircleRigidBody:
 				switch ((*b)->particleType) {
 				case Particle::GenericParticle:
+				case Particle::CircleRigidBody:
 					getParticleOverlaps(*a, *b);
 					break;
+				default:
+					getRectangleOverlaps(*a, *b);
 				}
 				break;
 			default:
+				getRectangleOverlaps(*a, *b);
 				break;
 			}
 

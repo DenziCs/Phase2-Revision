@@ -10,6 +10,7 @@ Particle::Particle(
 	float x,
 	float y,
 	float damp,
+	float rest,
 
 	float radius,
 	sf::Color sColor
@@ -23,6 +24,7 @@ Particle::Particle(
 	mass = _mass;
 	psSprite->setPosition(Utils::toWindowPoint(Vector(x, y)));
 	dampFactor = damp;
+	restitution = rest;
 	
 	circle->setRadius(radius);
 	circle->setOrigin(sf::Vector2f(radius, radius));
@@ -47,6 +49,10 @@ void Particle::setVelocity(Vector v) {
 
 void Particle::setLifespan(float life) {
 	lifespan = life;
+}
+
+void Particle::setRestitution(float rest) {
+	restitution = rest;
 }
 
 void Particle::setRadius(float radius) {
@@ -77,6 +83,10 @@ Vector Particle::getVelocity() {
 
 Vector Particle::getAcceleration() {
 	return acceleration;
+}
+
+float Particle::getRestitution() {
+	return restitution;
 }
 
 float Particle::getRadius() {

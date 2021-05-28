@@ -18,13 +18,23 @@ public:
 	};
 
 	Particle();
-	Particle(bool, float, float, float, float, float, sf::Color);
+	Particle(bool lifespanIsOn,
+		float _mass,
+		float x,
+		float y,
+		float damp,
+		float rest,
+
+		float radius,
+		sf::Color sColor
+	);
 
 	void setLifespanMode(bool);
 	void setMass(float);
 	void setPosition(float, float);
 	void setVelocity(Vector);
 	void setLifespan(float);
+	void setRestitution(float);
 	void setRadius(float);
 	void setColor(sf::Color);
 	void setDampFactor(float);
@@ -33,13 +43,14 @@ public:
 	Vector getPosition();
 	Vector getVelocity();
 	Vector getAcceleration();
+	float getRestitution();
 	float getRadius();
 	bool destroyed();
 	virtual float getMomentOfInertia();
 
 	void applyForce(Vector);
 	void resetForce();
-	void update(float);
+	void update(float deltaTime);
 	void draw(sf::RenderWindow*);
 
 	sf::Shape* psSprite;
@@ -55,8 +66,8 @@ protected:
 	float restitution;
 	float dampFactor = 1.f;
 	float angularDampFactor = 1.f;
-	float angularVelocity;
-	float rotation;
+	float angularVelocity = 0.f;
+	float rotation = 0.f;
 
 	bool hasLifespan = false;
 	bool isDestroyed = false;
