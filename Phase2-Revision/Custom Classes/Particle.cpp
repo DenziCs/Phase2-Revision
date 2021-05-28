@@ -16,18 +16,18 @@ Particle::Particle(
 	sf::Color sColor
 ) {
 	particleType = GenericParticle;
-	sf::CircleShape* circle = new sf::CircleShape;
+	sf::CircleShape* circle = new sf::CircleShape();
 	psSprite = circle;
 	netForce = Vector(0.0f, 0.0f);
 
 	hasLifespan = lifespanIsOn;
 	mass = _mass;
-	psSprite->setPosition(Utils::toWindowPoint(Vector(x, y)));
 	dampFactor = damp;
 	restitution = rest;
 	
 	circle->setRadius(radius);
 	circle->setOrigin(sf::Vector2f(radius, radius));
+	psSprite->setPosition(Utils::toWindowPoint(Vector(x, y)));
 	circle->setFillColor(sColor);
 }
 

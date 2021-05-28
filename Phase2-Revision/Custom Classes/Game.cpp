@@ -7,25 +7,33 @@ Game::Game() : gWindow(sf::VideoMode(WINDOW_X, WINDOW_Y), "Newton's Cradle") {
     physWorld.setOrigin(Vector(WINDOW_X / 2, WINDOW_Y / 2));
     physWorld.setContactLimit(25);
 
-    Particle* particle1 = new Particle(false, 20.f, -170, 0, 1.f, 40.f, sf::Color::Blue);
+    /*
+    Particle* particle1 = new Particle(false, 20.f, -170, 0, 1.f, 1.f, 40.f, sf::Color::Blue);
     physWorld.addParticle(particle1);
     physWorld.anchorWithCable(particle1, Vector(-170, WINDOW_Y / 2), 5, WINDOW_Y / 2);
 
-    Particle* particle2 = new Particle(false, 20.f, -85, 0, 1.f, 40.f, sf::Color::Blue);
+    Particle* particle2 = new Particle(false, 20.f, -85, 0, 1.f, 1.f, 40.f, sf::Color::Blue);
     physWorld.addParticle(particle2);
     physWorld.anchorWithCable(particle2, Vector(-85, WINDOW_Y / 2), 5, WINDOW_Y / 2);
 
-    Particle* particle3 = new Particle(false, 20.f, 0, 0, 1.f, 40.f, sf::Color::Blue);
+    Particle* particle3 = new Particle(false, 20.f, 0, 0, 1.f, 1.f, 40.f, sf::Color::Blue);
     physWorld.addParticle(particle3);
     physWorld.anchorWithCable(particle3, Vector(0, WINDOW_Y / 2), 5, WINDOW_Y / 2);
 
-    Particle* particle4 = new Particle(false, 20.f, 85, 0, 1.f, 40.f, sf::Color::Blue);
+    Particle* particle4 = new Particle(false, 20.f, 85, 0, 1.f, 1.f, 40.f, sf::Color::Blue);
     physWorld.addParticle(particle4);
     physWorld.anchorWithCable(particle4, Vector(85, WINDOW_Y / 2), 5, WINDOW_Y / 2);
 
-    Particle* particle5 = new Particle(false, 20.f, 170, 0, 1.f, 40.f, sf::Color::Blue);
+    Particle* particle5 = new Particle(false, 20.f, 170, 0, 1.f, 1.f, 40.f, sf::Color::Blue);
     physWorld.addParticle(particle5);
     physWorld.anchorWithCable(particle5, Vector(170, WINDOW_Y / 2), 5, WINDOW_Y / 2);
+    */
+
+    RectangularPrism* prism = new RectangularPrism(false, 20.f, 0, 0, 1.f, 1.f, 40.f, 10.f, sf::Color::Blue);
+    physWorld.addParticle(prism);
+    // physWorld.anchorWithCable(prism, Vector(0, WINDOW_Y / 2), 5, WINDOW_Y / 2);
+    prism->setRotation(0);
+    prism->applyForceAtPoint(Vector(20, 5), Vector(0, 16000));
 };
 
 void Game::run() {
