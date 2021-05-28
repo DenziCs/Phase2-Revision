@@ -39,3 +39,9 @@ float RectangularPrism::getLength() {
 	sf::RectangleShape* rect = (sf::RectangleShape*)psSprite;
 	return rect->getSize().y;
 }
+
+float RectangularPrism::getMomentOfInertia() {
+	float width = getWidth();
+	float length = getLength();
+	return (1.f / 12.f) * mass * (width * width + length * length);
+}

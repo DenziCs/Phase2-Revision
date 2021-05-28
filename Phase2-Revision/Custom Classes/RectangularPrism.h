@@ -20,4 +20,5 @@ public:
 
 	float getWidth();
 	float getLength();
+	float getMomentOfInertia();
 };

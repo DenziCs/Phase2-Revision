@@ -128,8 +128,7 @@ void Particle::update(float deltaTime) {
 	velocity.y += acceleration.y * deltaTime;
 	velocity.y *= powf(dampFactor, deltaTime);
 
-	float mI = getMomentOfInertia();
-	angularVelocity += -netTorque * deltaTime * (1.f / mI);
+	angularVelocity += -netTorque * deltaTime * (1.f / getMomentOfInertia());
 	angularVelocity *= powf(angularDampFactor, deltaTime);
 
 	if (hasLifespan) {
