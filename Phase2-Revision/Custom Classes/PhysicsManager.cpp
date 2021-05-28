@@ -93,51 +93,7 @@ void PhysicsManager::addContact(Particle* particleA, Particle* particleB, float 
 	contactList.push_back(contact);
 }
 
-void PhysicsManager::getParticleOverlaps(Particle* a, Particle* b) {
-	float x1 = a->getPosition().x;
-	float x2 = b->getPosition().x;
-	float y1 = a->getPosition().y;
-	float y2 = b->getPosition().y;
-
-	//square magnitude
-	float mag2 = ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1));
-
-	//square of sum of radius
-	float rad2 = ((a)->getRadius() + (b)->getRadius()) * ((a)->getRadius() + (b)->getRadius());
-
-	//if sq mag = sq sum; touching
-	//if sq mag < sq sum; overlapping
-	if (mag2 <= rad2) {
-		Vector dir = Vector((a)->getPosition().x - (b)->getPosition().x, (a)->getPosition().y - (b)->getPosition().y);
-		dir = dir.getNormalized();
-		float r = rad2 - mag2;
-		float depth = sqrt(r);
-
-		float rest = a->getRestitution();
-		if (b->getRestitution() < a->getRestitution()) rest = b->getRestitution();
-		addContact(a, b, rest, depth);
-	}
-}
-
-void PhysicsManager::getRectangleOverlaps(Particle* a, Particle* b) {
-	switch (a->particleType) {
-	case Particle::RectangleRigidBody:
-		switch (b->particleType) {
-		case Particle::RectangleRigidBody:
-			processRigidbodyContact((RectangularPrism*)a, b);
-			break;
-		default:
-			processRigidbodyContact((RectangularPrism*)a, (RectangularPrism*)b);
-			break;
-		}
-		break;
-	default:
-		processRigidbodyContact((RectangularPrism*)b, a);
-		break;
-	}
-}
-
-//rectangle and circle
+// For a rectangle and a circle.
 void PhysicsManager::processRigidbodyContact(RectangularPrism* a, Particle* b) {
 	Vector relVector = b->getPosition() - a->getPosition();
 	float invAngle = -(a->getRotation());
@@ -166,9 +122,6 @@ void PhysicsManager::processRigidbodyContact(RectangularPrism* a, Particle* b) {
 
 	float sqD = (D_x * D_x) + (D_y * D_y);
 	if (sqD <= b->getRadius() * b->getRadius()) {
-		Vector dir = locVector * -1;
-		dir = dir.getNormalized();
-
 		float restitution = a->getRest();
 		if (b->getRestitution() < a->getRest()) {
 			restitution = b->getRestitution();
@@ -178,7 +131,7 @@ void PhysicsManager::processRigidbodyContact(RectangularPrism* a, Particle* b) {
 	}
 }
 
-//two rectangles
+// For two rectangles.
 void PhysicsManager::processRigidbodyContact(RectangularPrism* a, RectangularPrism* b) {
 	std::vector<RectangularPrism*> rects;
 	rects.push_back(a);
@@ -234,17 +187,56 @@ void PhysicsManager::processRigidbodyContact(RectangularPrism* a, RectangularPri
 				//end loop to save calls
 				break;
 			}
-
-			if (ret) {
-				Vector dir = a->getPosition() - b->getPosition();
-				dir = dir.getNormalized();
-
-				float rest = a->getRestitution();
-				if (b->getRestitution() < a->getRestitution()) rest = b->getRestitution();
-
-				addContact(a, b, rest, 0);
-			}
 		}
+	}
+
+	if (ret) {
+		float rest = a->getRestitution();
+		if (b->getRestitution() < a->getRestitution()) rest = b->getRestitution();
+
+		addContact(a, b, rest, 0);
+	}
+}
+
+void PhysicsManager::getParticleOverlaps(Particle* a, Particle* b) {
+	float x1 = a->getPosition().x;
+	float x2 = b->getPosition().x;
+	float y1 = a->getPosition().y;
+	float y2 = b->getPosition().y;
+
+	//square magnitude
+	float mag2 = ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1));
+
+	//square of sum of radius
+	float rad2 = ((a)->getRadius() + (b)->getRadius()) * ((a)->getRadius() + (b)->getRadius());
+
+	//if sq mag = sq sum; touching
+	//if sq mag < sq sum; overlapping
+	if (mag2 <= rad2) {
+		float r = rad2 - mag2;
+		float depth = sqrt(r);
+
+		float rest = a->getRestitution();
+		if (b->getRestitution() < a->getRestitution()) rest = b->getRestitution();
+		addContact(a, b, rest, depth);
+	}
+}
+
+void PhysicsManager::getRectangleOverlaps(Particle* a, Particle* b) {
+	switch (a->particleType) {
+	case Particle::RectangleRigidBody:
+		switch (b->particleType) {
+		case Particle::RectangleRigidBody:
+			processRigidbodyContact((RectangularPrism*)a, (RectangularPrism*)b);
+			break;
+		default:
+			processRigidbodyContact((RectangularPrism*)a, b);
+			break;
+		}
+		break;
+	default:
+		processRigidbodyContact((RectangularPrism*)b, a);
+		break;
 	}
 }
 

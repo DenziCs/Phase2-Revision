@@ -33,11 +33,11 @@ Game::Game() : gWindow(sf::VideoMode(WINDOW_X, WINDOW_Y), "Newton's Cradle") {
     physWorld.addParticle(particle1);
     particle1->applyForce(Vector(40000, 0));
 
-    Sphere* particle2 = new Sphere(false, 10.f, 200, 100, 0.9f, 1.f, 1.f, 20.f, sf::Color::White);
+    Sphere* particle2 = new Sphere(false, 10.f, 200, 100, 0.9f, 1.f, 0.9f, 20.f, sf::Color::White);
     physWorld.addParticle(particle2);
     particle2->applyForce(Vector(-40000, 0));
 
-    Sphere* particle3 = new Sphere(false, 10.f, -200, 0, 0.9f, 1.f, 1.f, 20.f, sf::Color::White);
+    Sphere* particle3 = new Sphere(false, 10.f, -200, 0, 0.9f, 1.f, 0.8f, 20.f, sf::Color::White);
     physWorld.addParticle(particle3);
     particle3->applyForce(Vector(40000, 0));
 
@@ -51,9 +51,9 @@ Game::Game() : gWindow(sf::VideoMode(WINDOW_X, WINDOW_Y), "Newton's Cradle") {
     particle5->setRotation(-0.7854);
     particle5->applyForce(Vector(40000, 0));
 
-    RectangularPrism* particle6 = new RectangularPrism(false, 10.f, 200, -100, 0.9f, 1.f, 1.f, 40.f, 30.f, sf::Color::White);
+    RectangularPrism* particle6 = new RectangularPrism(false, 10.f, 200, -100, 0.9f, 1.f, 0.95f, 40.f, 30.f, sf::Color::White);
     physWorld.addParticle(particle6);
-    particle6->setRotation(0.5236);
+    particle5->setRotation(0.5236);
     particle6->applyForce(Vector(-40000, 0));
 
     physWorld.setDrawLinks(false);

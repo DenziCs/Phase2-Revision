@@ -18,6 +18,7 @@
 #include<vector>
 #include<SFML/Graphics.hpp>
 #include<time.h>
+#include<iostream>
 #pragma once
 using namespace std;
 using namespace gdphys;
@@ -48,10 +49,10 @@ public:
 	void addToAll(ForceGenerator*);
 
 	void addContact(Particle*, Particle*, float restitution, float depth);
-	void getParticleOverlaps(Particle*, Particle*);
-	void getRectangleOverlaps(Particle*, Particle*);
 	void processRigidbodyContact(RectangularPrism*, RectangularPrism*);
 	void processRigidbodyContact(RectangularPrism*, Particle*);
+	void getParticleOverlaps(Particle*, Particle*);
+	void getRectangleOverlaps(Particle*, Particle*);
 	void checkParticles();
 	void checkAnchors();
 	void checkLinks();
