@@ -1,7 +1,6 @@
 #include "Particle.h"
 
 Particle::Particle() {
-	psSprite = new sf::CircleShape;
 	netForce = Vector(0.0f, 0.0f);
 }
 
@@ -15,16 +14,19 @@ Particle::Particle(
 	float radius,
 	sf::Color sColor
 ) {
-	psSprite = new sf::CircleShape;
+	particleType = GenericParticle;
+	sf::CircleShape* circle = new sf::CircleShape;
+	psSprite = circle;
 	netForce = Vector(0.0f, 0.0f);
 
 	hasLifespan = lifespanIsOn;
 	mass = _mass;
 	psSprite->setPosition(Utils::toWindowPoint(Vector(x, y)));
 	dampFactor = damp;
-	psSprite->setRadius(radius);
-	psSprite->setOrigin(sf::Vector2f(radius, radius));
-	psSprite->setFillColor(sColor);
+	
+	circle->setRadius(radius);
+	circle->setOrigin(sf::Vector2f(radius, radius));
+	circle->setFillColor(sColor);
 }
 
 void Particle::setLifespanMode(bool lifespanIsOn) {
@@ -48,8 +50,9 @@ void Particle::setLifespan(float life) {
 }
 
 void Particle::setRadius(float radius) {
-	psSprite->setRadius(radius);
-	psSprite->setOrigin(sf::Vector2f(radius, radius));
+	sf::CircleShape* circle = (sf::CircleShape*)psSprite;
+	circle->setRadius(radius);
+	circle->setOrigin(sf::Vector2f(radius, radius));
 }
 
 void Particle::setColor(sf::Color sColor) {
@@ -77,7 +80,8 @@ Vector Particle::getAcceleration() {
 }
 
 float Particle::getRadius() {
-	return psSprite->getRadius();
+	sf::CircleShape* circle = (sf::CircleShape*)psSprite;
+	return circle->getRadius();
 }
 
 bool Particle::destroyed() {
