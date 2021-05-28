@@ -34,10 +34,10 @@ RectangularPrism::RectangularPrism(
 	Vector ur = Vector(width / 2, length / 2);
 	Vector lr = Vector(width / 2, -length / 2);
 
-	points[0] = Utils::rotatePoint(ul, this->getRotation()) + this->getPosition();
-	points[1] = Utils::rotatePoint(ur, this->getRotation()) + this->getPosition();
-	points[2] = Utils::rotatePoint(lr, this->getRotation()) + this->getPosition();
-	points[3] = Utils::rotatePoint(ll, this->getRotation()) + this->getPosition();
+	points.push_back(Utils::rotatePoint(ul, this->getRotation()) + this->getPosition());
+	points.push_back(Utils::rotatePoint(ur, this->getRotation()) + this->getPosition());
+	points.push_back(Utils::rotatePoint(lr, this->getRotation()) + this->getPosition());
+	points.push_back(Utils::rotatePoint(ll, this->getRotation()) + this->getPosition());
 }
 
 float RectangularPrism::getWidth() {
