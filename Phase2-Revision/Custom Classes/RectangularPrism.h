@@ -20,4 +20,6 @@ public:
 
 	float getWidth();
 	float getLength();
+	float getRest();
+	std::vector<Vector> points;
 };

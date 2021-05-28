@@ -328,3 +328,164 @@ void PhysicsManager::generateParticleContacts(Particle* a, Particle* b) {
 		addContact(a, b, 1.f, depth);
 	}
 }
+
+void PhysicsManager::generateRigidbodyContacts(Particle* a, Particle* b) {
+	/*
+		GenericParticle = 0,
+		GenericRigidBody = 1,
+		CircleRigidBody = 2,
+		RectangleRigidBody = 3
+	*/
+
+	//for 2 circles or a circle and particle
+	if ((a->particleType == 2 && b->particleType == 2) ||
+		(a->particleType == 2 && b->particleType == 0) ||
+		(a->particleType == 0 && b->particleType == 2))
+	{
+		//both objects can be considered a circle
+		generateParticleContacts(a, b);
+	}
+
+	//2 rectangle rigidbodies
+	else if (a->particleType == 3 && b->particleType == 3) {
+		processRigidbodyContact(a, b);
+	}
+
+	//rect and circle
+	else {
+		//a is rect
+		if (a->particleType == 3) {
+			processRigidbodyContact(a, b);
+		}
+
+		//b is rect
+		else {
+			processRigidbodyContact(b, a);
+		}
+	}
+}
+
+//rectangle and circle
+void PhysicsManager::processRigidbodyContact(RectangularPrism* a, Particle* b) {
+	Vector relVector = b->getPosition() - a->getPosition();
+	float invAngle = -(a->getRotation());
+	Vector locVector = Utils::rotatePoint(relVector, invAngle);
+
+	float minX = locVector.x;
+	if ((a->getWidth() / 2) < minX) {
+		minX = a->getWidth() / 2;
+	}
+	float maxX = minX;
+	if (maxX < -(a->getWidth() / 2)) {
+		maxX = -(a->getWidth() / 2);
+	}
+
+	float minY = locVector.y;
+	if ((a->getLength() / 2) < minY) {
+		minY = a->getLength() / 2;
+	}
+	float maxY = minY;
+	if (maxY < -(a->getLength() / 2)) {
+		maxY = -(a->getLength() / 2);
+	}
+
+	float D_x = locVector.x - maxX;
+	float D_y = locVector.y - maxY;
+
+	bool col = ((D_x * D_x) + (D_y + D_y)) <= (b->getRadius() * b->getRadius());
+	float depth = (D_x * D_x) + (D_y + D_y);
+
+	if (col) {
+		Vector dir = locVector * -1;
+		dir = dir.getNormalized();
+
+		float restitution = a->getRest();
+		if (b->getRestitution() < a->getRest()) {
+			restitution = b->getRestitution();
+		}
+
+		addContact(a, b, restitution, depth);
+	}
+}
+
+//two rectangles
+void PhysicsManager::processRigidbodyContact(RectangularPrism* a, RectangularPrism* b) {
+	std::vector<RectangularPrism*> rects;
+	rects.push_back(a);
+	rects.push_back(b);
+
+	bool ret = true;
+
+	for (int i = 0; i < rects.size(); i++) {
+		for (int e1 = 0; e1 < rects[i]->points.size(); e1++) {
+			int e2 = (e1 + 1) % rects[i]->points.size();
+			Vector p1 = rects[i]->points[e1];
+			Vector p2 = rects[i]->points[e2];
+			
+			Vector projectionNormal = Vector(p2.y - p1.y, p1.x - p2.x);
+
+			//first rect
+			float minA = projectionNormal.dotProduct(rects[0]->points[0]);
+			float maxA = projectionNormal.dotProduct(rects[0]->points[0]);
+
+			for (int h = 1; h < rects[0]->points.size(); h++) {
+				float proj = projectionNormal.dotProduct(rects[0]->points[h]);
+
+				if (proj < minA) minA = proj;
+				if (proj > maxA) maxA = proj;
+			}
+
+			//second rect
+			float minB = projectionNormal.dotProduct(rects[1]->points[0]);
+			float maxB = projectionNormal.dotProduct(rects[1]->points[0]);
+
+			for (int h = 1; h < rects[1]->points.size(); h++) {
+				float proj = projectionNormal.dotProduct(rects[1]->points[h]);
+
+				if (proj < minB) minB = proj;
+				if (proj > maxB) maxB = proj;
+			}
+
+			//check if test fail
+			if (maxA < minB || maxB < minA) {
+				ret = false;
+				//end loop to save calls
+				break;
+			}
+
+			if (ret) {
+				Vector dir = a->getPosition() - b->getPosition();
+				dir = dir.getNormalized();
+
+				float rest = a->getRestitution();
+				if (b->getRestitution() < a->getRestitution()) rest = b->getRestitution();
+
+				addContact(a, b, rest, 0);
+			}
+		}
+	}
+}
+
+//two circles
+void PhysicsManager::processRigidbodyContact(Particle* a, Particle* b) {
+	float x1 = (a)->getPosition().x;
+	float x2 = (b)->getPosition().x;
+	float y1 = (a)->getPosition().y;
+	float y2 = (b)->getPosition().y;
+
+	//square magnitude
+	float mag2 = ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1));
+
+	//square of sum of radius
+	float rad2 = ((a)->getRadius() + (b)->getRadius()) * ((a)->getRadius() + (b)->getRadius());
+
+	//if sq mag = sq sum; touching
+	//if sq mag < sq sum; overlapping
+	if (mag2 <= rad2) {
+		Vector dir = Vector((a)->getPosition().x - (b)->getPosition().x, (a)->getPosition().y - (b)->getPosition().y);
+		dir = dir.getNormalized();
+		float r = rad2 - mag2;
+		float depth = sqrt(r);
+		addContact(a, b, 1.f, depth);
+	}
+}

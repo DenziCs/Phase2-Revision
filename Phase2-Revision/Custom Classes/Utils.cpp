@@ -25,3 +25,10 @@ float Utils::inDegrees(float theta) {
 float Utils::inRadians(float theta) {
 	return theta * (acos(-1.f) / 180.f);
 }
+
+Vector Utils::rotatePoint(Vector v, float theta) {
+	Vector result;
+	result.x = (v.x * cos(theta)) + (v.y * sin(theta));
+	result.y = -(v.x * sin(theta)) + (v.y * cos(theta));
+	return result;
+}
