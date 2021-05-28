@@ -268,3 +268,26 @@ void PhysicsManager::updateParticleList() {
 		}
 	}
 }
+
+void PhysicsManager::generateParticleContacts(Particle* a, Particle* b) {
+	float x1 = (a)->getPosition().x;
+	float x2 = (b)->getPosition().x;
+	float y1 = (a)->getPosition().y;
+	float y2 = (b)->getPosition().y;
+
+	//square magnitude
+	float mag2 = ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1));
+
+	//square of sum of radius
+	float rad2 = ((a)->getRadius() + (b)->getRadius()) * ((a)->getRadius() + (b)->getRadius());
+
+	//if sq mag = sq sum; touching
+	//if sq mag < sq sum; overlapping
+	if (mag2 <= rad2) {
+		Vector dir = Vector((a)->getPosition().x - (b)->getPosition().x, (a)->getPosition().y - (b)->getPosition().y);
+		dir = dir.getNormalized();
+		float r = rad2 - mag2;
+		float depth = sqrt(r);
+		addContact(a, b, 1.f, depth);
+	}
+}

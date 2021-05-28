@@ -57,6 +57,13 @@ public:
 	void updateForces();
 	void update(float);
 	void drawAll(sf::RenderWindow*);
+
+	void generateParticleContacts(Particle* a, Particle* b);	//generate contacts when both are particles
+	void generateRigidbodyContacts(Particle* a, Particle* b);	//generate contacts when one or both are rigidbodies
+
+	void processRigidbodyContact(RectBody* a, RectBody* b);
+	void processRigidbodyContact(RectBody* a, Particle* b);
+	void processRigidbodyContact(Particle* a, Particle* b);
 	
 	list<Particle*> particleList;
 	vector<ContactResolver*> contactList;
