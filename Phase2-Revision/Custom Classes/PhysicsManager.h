@@ -11,6 +11,7 @@
 #include"ParticleLink.h"
 #include"ParticleSpring.h"
 #include"ParticleRod.h"
+#include"RigidBody.h"
 #include<list>
 #include<vector>
 #include<SFML/Graphics.hpp>
@@ -44,6 +45,8 @@ public:
 	void addToAll(ForceGenerator*);
 
 	void addContact(Particle*, Particle*, float, float);
+	void getParticleOverlaps(Particle*, Particle*);
+	void getRigidBodyOverlaps();
 	void checkParticles();
 	void checkAnchors();
 	void checkLinks();
