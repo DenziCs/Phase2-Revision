@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game() : gWindow(sf::VideoMode(WINDOW_X, WINDOW_Y), "Newton's Cradle") {
+Game::Game() : gWindow(sf::VideoMode(WINDOW_X, WINDOW_Y), "Collision Test") {
     gWindow.setFramerateLimit(60);
     physWorld.setGravity(0, Vector(0, -1));
     physWorld.setLimit(25);

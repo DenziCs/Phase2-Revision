@@ -263,7 +263,6 @@ void PhysicsManager::checkParticles() {
 				break;
 			default:
 				getRectangleOverlaps(*a, *b);
-				break;
 			}
 
 		}

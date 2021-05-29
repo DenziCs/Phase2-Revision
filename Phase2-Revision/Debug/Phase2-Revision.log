@@ -1,5 +1,5 @@
 ﻿  Game.cpp
-C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\Game.cpp(46,34): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\Game.cpp(51,35): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\Game.cpp(56,34): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\Game.cpp(24,34): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\Game.cpp(29,35): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Phase2-Revision\Custom Classes\Game.cpp(34,34): warning C4305: 'argument': truncation from 'double' to 'float'
   Phase2-Revision.vcxproj -> C:\Users\natha\source\repos\DenziCs\Phase2-Revision\Debug\Phase2-Revision.exe
