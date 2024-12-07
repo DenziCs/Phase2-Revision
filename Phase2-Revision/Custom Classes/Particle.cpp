@@ -12,17 +12,19 @@ Particle::Particle(
 	float life,
 	float damp,
 
-	float size,
+	float radius,
 	sf::Color sColor
 ) {
 	psSprite = new sf::CircleShape;
 	netForce = Vector(0.0f, 0.0f);
 
 	mass = _mass;
-	psSprite->setPosition(x, y);
+	position = Vector(x, y);
+	psSprite->setPosition(Utils::toWindowPoint(Vector(x, y)));
 	lifespan = life;
 	dampFactor = damp;
-	psSprite->setRadius(size);
+	psSprite->setRadius(radius);
+	psSprite->setOrigin(sf::Vector2f(radius, radius));
 	psSprite->setFillColor(sColor);
 }
 
@@ -30,16 +32,22 @@ void Particle::setMass(float _mass) {
 	mass = _mass;
 }
 
-void Particle::setPos(float x, float y) {
-	psSprite->setPosition(x, y);
+void Particle::setPosition(float x, float y) {
+	position = Vector(x, y);
+	psSprite->setPosition(Utils::toWindowPoint(Vector(x, y)));
+}
+
+void Particle::setVelocity(Vector v) {
+	velocity = v;
 }
 
 void Particle::setLifespan(float life) {
 	lifespan = life;
 }
 
-void Particle::setSize(float size) {
-	psSprite->setRadius(size);
+void Particle::setRadius(float radius) {
+	psSprite->setRadius(radius);
+	psSprite->setOrigin(sf::Vector2f(radius, radius));
 }
 
 void Particle::setColor(sf::Color sColor) {
@@ -54,12 +62,20 @@ float Particle::getMass() {
 	return mass;
 }
 
+Vector Particle::getPosition() {
+	return position;
+}
+
 Vector Particle::getVelocity() {
 	return velocity;
 }
 
 Vector Particle::getAcceleration() {
 	return acceleration;
+}
+
+float Particle::getRadius() {
+	return psSprite->getRadius();
 }
 
 bool Particle::destroyed() {
@@ -81,8 +97,8 @@ void Particle::update(float deltaTime) {
 
 	displacement.x = (0.5 * acceleration.x * powf(deltaTime, 2)) + (velocity.x * deltaTime);
 	displacement.y = (0.5 * acceleration.y * powf(deltaTime, 2)) + (velocity.y * deltaTime);
-	displacement = asWindowVector(displacement);
-	psSprite->move(sf::Vector2f(displacement.x, displacement.y));
+	position = position + displacement;
+	psSprite->move(Utils::toWindowVector(displacement));
 
 	velocity.x += acceleration.x * deltaTime;
 	velocity.x *= powf(dampFactor, deltaTime);
@@ -97,8 +113,4 @@ void Particle::update(float deltaTime) {
 
 void Particle::draw(sf::RenderWindow* pgWindow) {
 	pgWindow->draw(*psSprite);
-}
-
-Vector Particle::asWindowVector(Vector cVector) {
-	return Vector(cVector.x, -cVector.y);
 }
